@@ -5,22 +5,6 @@ import { Link, usePathname, useRouter } from '@/i18n/routing';
 import { useState } from 'react';
 import { useLocale } from 'next-intl';
 
-const logoSVG = (
-  <svg className="w-[46px] h-[46px] shrink-0" viewBox="0 0 46 46" fill="none">
-    <rect width="46" height="46" fill="#eef4f0"/>
-    <ellipse cx="27" cy="23" rx="9.5" ry="5.2" fill="none" stroke="#1a3a28" strokeWidth="1.7"/>
-    <line x1="17.5" y1="23" x2="8" y2="27" stroke="#1a3a28" strokeWidth="1.5"/>
-    <line x1="8" y1="24" x2="8" y2="30" stroke="#1a3a28" strokeWidth="1.5"/>
-    <line x1="11" y1="18.5" x2="40" y2="18.5" stroke="#1a3a28" strokeWidth="2.1"/>
-    <line x1="27" y1="17" x2="27" y2="19.5" stroke="#1a3a28" strokeWidth="1.5"/>
-    <line x1="21" y1="28" x2="21" y2="31.5" stroke="#1a3a28" strokeWidth="1.3"/>
-    <line x1="33" y1="28" x2="33" y2="31.5" stroke="#1a3a28" strokeWidth="1.3"/>
-    <line x1="18" y1="31.5" x2="36" y2="31.5" stroke="#1a3a28" strokeWidth="1.3"/>
-    <polygon points="23,38 19,46 27,46" fill="#3d7a55" opacity="0.65"/>
-    <polygon points="23,34 17,44 29,44" fill="#2a5a3e" opacity="0.45"/>
-  </svg>
-);
-
 export function Navbar() {
   const t = useTranslations('nav');
   const locale = useLocale();
@@ -39,7 +23,7 @@ export function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-6 md:px-12 h-[76px] bg-white/97 backdrop-blur-xl border-b border-border">
       {/* Logo */}
       <Link href="/" className="flex items-center gap-3.5 no-underline">
-        {logoSVG}
+        <img src="/logo.gif" alt="Казавиалесоохрана" className="w-[46px] h-[46px] shrink-0 object-contain" />
         <div className="flex flex-col leading-tight">
           <span className="text-[15px] font-extrabold text-forest tracking-wide">КАЗАВИАЛЕСООХРАНА</span>
           <span className="text-[8.5px] text-text-dim tracking-widest uppercase font-medium mt-0.5">
