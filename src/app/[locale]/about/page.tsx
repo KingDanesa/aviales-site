@@ -5,12 +5,11 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 import Image from 'next/image';
 
 const timeline = [
-  { year: '1948', active: true },
-  { year: '1972', active: false },
-  { year: '1978', active: true },
-  { year: '1989', active: false },
-  { year: '2003', active: false },
-  { year: '2026', active: true },
+  { year: '1978', active: true, title: 'Основание Казавиалесоохраны', desc: 'В республике организована самостоятельная специализированная служба — Казахская база авиационной охраны лесов.' },
+  { year: '1989', active: false, title: 'Расцвет службы', desc: '14 авиалесоохранных подразделений охраняли более 6,5 млн га лесов.' },
+  { year: '2003', active: false, title: 'Восстановление и рост', desc: 'С 2003 года налёты стали стабильными: от 6 200 до 9 000 часов в год.' },
+  { year: '2015', active: false, title: 'Модернизация парка', desc: 'Обновление авиационного парка и оснащение современной техникой наблюдения.' },
+  { year: '2026', active: true, title: 'Сегодня', desc: '«Казавиалесоохрана» продолжает выполнять миссию по защите лесов Казахстана — 18 авиационных отделений по всей республике.' },
 ];
 
 const functions = [
@@ -56,6 +55,28 @@ export default function AboutPage() {
         </div>
       </div>
 
+      {/* Central office / requisites */}
+      <div className="px-8 md:px-14 pb-18">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border reveal-stagger">
+          <div className="bg-white p-8">
+            <div className="w-10 h-10 bg-sky flex items-center justify-center text-lg mb-4">🏛️</div>
+            <div className="text-[11px] text-text-dim font-bold tracking-widest uppercase mb-2">Юридический адрес</div>
+            <div className="text-[14px] text-forest font-semibold leading-relaxed">г. Алматы, мкр Таусамалы, ул. Мереке, 24</div>
+          </div>
+          <div className="bg-white p-8">
+            <div className="w-10 h-10 bg-sky flex items-center justify-center text-lg mb-4">📍</div>
+            <div className="text-[11px] text-text-dim font-bold tracking-widest uppercase mb-2">Фактический адрес</div>
+            <div className="text-[14px] text-forest font-semibold leading-relaxed">г. Алматы, ул. Абая, 32/2</div>
+          </div>
+          <div className="bg-white p-8">
+            <div className="w-10 h-10 bg-sky flex items-center justify-center text-lg mb-4">📞</div>
+            <div className="text-[11px] text-text-dim font-bold tracking-widest uppercase mb-2">Контакты</div>
+            <a href="tel:+77273461371" className="block text-[14px] text-forest font-semibold no-underline hover:text-amber-dark">+7 (727) 346-13-71</a>
+            <a href="mailto:Airbar@list.ru" className="block text-[14px] text-forest-light font-semibold no-underline hover:text-amber-dark mt-1">Airbar@list.ru</a>
+          </div>
+        </div>
+      </div>
+
       {/* Functions */}
       <div className="bg-sky px-8 md:px-14 py-18">
         <div className="text-[11px] tracking-[0.18em] uppercase font-bold text-forest-light mb-4 flex items-center gap-3 reveal from-bottom">
@@ -86,12 +107,8 @@ export default function AboutPage() {
               <div className="text-[26px] font-extrabold text-forest tracking-tight leading-none pt-1">{item.year}</div>
               <div className={`absolute left-[112px] top-[38px] w-[17px] h-[17px] rounded-full border-2 hidden md:block ${item.active ? 'bg-amber border-amber' : 'bg-white border-forest-light'}`} />
               <div>
-                <h3 className="text-[15px] font-bold text-forest mb-2">
-                  {i === 0 ? 'Начало авиационной охраны' : i === 1 ? 'Казахский авиарайон' : i === 2 ? 'Основание Казавиалесоохраны' : i === 3 ? 'Расцвет службы' : i === 4 ? 'Восстановление и рост' : 'Сегодня'}
-                </h3>
-                <p className="text-[13.5px] text-text-dim leading-relaxed">
-                  {i === 0 ? 'Авиационная охрана лесов в Казахстане была начата в трёх наиболее опасных в пожарном отношении областях.' : i === 1 ? 'Создан Казахский авиарайон Западно-Сибирской авиабазы.' : i === 2 ? 'В республике организована самостоятельная специализированная служба — Казахская база авиационной охраны лесов.' : i === 3 ? '14 авиалесоохранных подразделений охраняли более 6,5 млн га лесов.' : i === 4 ? 'С 2003 года налёты стали стабильными: от 6 200 до 9 000 часов в год.' : '«Казавиалесоохрана» продолжает выполнять миссию по защите лесов Казахстана.'}
-                </p>
+                <h3 className="text-[15px] font-bold text-forest mb-2">{item.title}</h3>
+                <p className="text-[13.5px] text-text-dim leading-relaxed">{item.desc}</p>
               </div>
             </div>
           ))}

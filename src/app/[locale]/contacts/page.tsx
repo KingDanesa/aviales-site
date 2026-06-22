@@ -32,7 +32,7 @@ export default function ContactsPage() {
           </div>
           <div className="flex flex-col gap-6 relative z-[1]">
             {[
-              { icon: '📍', label: t('contactsPage.address'), value: 'г. Алматы, ул. Абая 32/2\nРеспублика Казахстан' },
+              { icon: '📍', label: t('contactsPage.address'), value: 'Факт.: г. Алматы, ул. Абая, 32/2\nЮр.: мкр Таусамалы, ул. Мереке, 24' },
               { icon: '📞', label: t('contactsPage.phone'), value: '+7 (727) 346-13-71', href: 'tel:+77273461371' },
               { icon: '✉️', label: t('contactsPage.email'), value: 'airbar@list.ru', href: 'mailto:airbar@list.ru' },
             ].map((item, i) => (

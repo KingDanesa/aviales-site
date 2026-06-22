@@ -321,7 +321,7 @@ export default function HomePage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 bg-sky border-b border-border" id="stats">
         {[
           { n: '1978', target: '1978', fixed: true, label: t('stats.year'), w: '100' },
-          { n: '0', target: '14', label: t('stats.branches'), w: '60' },
+          { n: '0', target: '18', label: t('stats.branches'), w: '75' },
           { n: '0', target: '9000', label: t('stats.hours'), w: '88' },
           { n: '6.5М', label: t('stats.hectares'), w: '75' },
         ].map((stat, i) => (
@@ -411,13 +411,14 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 reveal-stagger">
             {[
-              { name: 'Ми-8', country: 'Россия', type: 'Транспортный', desc: 'Многоцелевой средний вертолёт. Основная рабочая машина для тушения пожаров и доставки десанта.', icon: '🚁' },
-              { name: 'Ми-171', country: 'Россия', type: 'Транспортный', desc: 'Модернизированная версия Ми-8. Повышенная грузоподъёмность и дальность полёта.', icon: '🚁' },
-              { name: 'Ми-2', country: 'Россия', type: 'Лёгкий', desc: 'Лёгкий многоцелевой вертолёт для патрулирования и разведки лесных массивов.', icon: '🚁' },
-              { name: 'Bell 206', country: 'США', type: 'Лёгкий', desc: 'Лёгкий вертолёт для оперативного авиапатрулирования лесных территорий.', icon: '🚁' },
-              { name: 'MD-600', country: 'США', type: 'Лёгкий', desc: 'Однодвигательный вертолёт с системой NOTAR для тихого патрулирования.', icon: '🚁' },
-              { name: 'EC-120B', country: 'Франция', type: 'Лёгкий', desc: 'Лёгкий вертолёт Eurocopter для наблюдения и мониторинга пожарной обстановки.', icon: '🚁' },
-              { name: 'BO-105', country: 'Германия', type: 'Лёгкий', desc: 'Лёгкий многоцелевой вертолёт с высокой манёвренностью для сложного рельефа.', icon: '🚁' },
+              { name: 'Ан-2', country: 'СССР', type: 'Самолёт', desc: 'Лёгкий многоцелевой самолёт-биплан для авиапатрулирования и доставки парашютистов-пожарных.', icon: '✈️' },
+              { name: 'PA-68 «Partenavia»', country: 'Италия', type: 'Самолёт', desc: 'Лёгкий двухмоторный самолёт для авиационного наблюдения и патрулирования лесов.', icon: '✈️' },
+              { name: 'Ми-8', country: 'Россия', type: 'Вертолёт', desc: 'Многоцелевой средний вертолёт. Основная рабочая машина для тушения пожаров и доставки десанта.', icon: '🚁' },
+              { name: 'Ми-2', country: 'Россия / Польша', type: 'Вертолёт', desc: 'Лёгкий многоцелевой вертолёт для патрулирования и разведки лесных массивов.', icon: '🚁' },
+              { name: 'EC-130', country: 'Франция', type: 'Вертолёт', desc: 'Лёгкий вертолёт Airbus для наблюдения и мониторинга пожарной обстановки.', icon: '🚁' },
+              { name: 'EC-145', country: 'Франция / Германия', type: 'Вертолёт', desc: 'Двухдвигательный вертолёт для доставки десанта и решения оперативных задач.', icon: '🚁' },
+              { name: 'AS-350', country: 'Франция', type: 'Вертолёт', desc: 'Лёгкий вертолёт Écureuil с высокой манёвренностью для патрулирования.', icon: '🚁' },
+              { name: 'BO-105', country: 'Германия', type: 'Вертолёт', desc: 'Лёгкий многоцелевой вертолёт с высокой манёвренностью для сложного рельефа.', icon: '🚁' },
             ].map((aircraft, i) => (
               <div key={i} className="bg-white/[0.07] backdrop-blur-sm border border-white/[0.08] p-6 hover:bg-white/[0.12] hover:-translate-y-1 transition-all group cursor-default rounded-sm">
                 <div className="flex items-center justify-between mb-4">
@@ -439,7 +440,7 @@ export default function HomePage() {
           <span className="w-7 h-0.5 bg-forest-light shrink-0" />География присутствия
         </div>
         <h2 className="text-[clamp(28px,3.5vw,48px)] font-extrabold leading-[1.05] tracking-tight text-forest mb-4 reveal from-bottom" style={{ transitionDelay: '.1s', textWrap: 'balance' as never }}>
-          14 авиаотделений<br />по всему Казахстану
+          18 авиаотделений<br />по всему Казахстану
         </h2>
         <p className="text-[15px] text-text-mid leading-[1.8] mb-12 max-w-[620px] reveal from-bottom" style={{ transitionDelay: '.2s' }}>
           От Костаная на севере до Алматы на юге — наши подразделения обеспечивают охрану лесных массивов на всей территории республики
@@ -465,20 +466,24 @@ export default function HomePage() {
 
               {/* Branch dots */}
               {[
+                { name: 'Западно-Казахстанское', x: 100, y: 170 },
                 { name: 'Костанайское', x: 230, y: 115 },
-                { name: 'Боровское', x: 350, y: 120 },
-                { name: 'Кокшетауское', x: 380, y: 138 },
-                { name: 'Павлодарское', x: 470, y: 130 },
-                { name: 'Баянаульское', x: 450, y: 165 },
-                { name: 'Каркаралинское', x: 420, y: 200 },
-                { name: 'Семейское', x: 560, y: 170 },
-                { name: 'Букебаевское', x: 530, y: 155 },
-                { name: 'Бородулихинское', x: 590, y: 150 },
+                { name: 'Боровское', x: 345, y: 120 },
+                { name: 'Кокшетауское', x: 375, y: 140 },
+                { name: 'Акмолинское', x: 360, y: 132 },
+                { name: 'Жасыл Аймак', x: 400, y: 152 },
+                { name: 'Павлодарское', x: 475, y: 125 },
+                { name: 'Баянаульское', x: 455, y: 162 },
+                { name: 'Каркаралинское', x: 425, y: 200 },
+                { name: 'Букебайское', x: 525, y: 155 },
+                { name: 'Бородулихинское', x: 565, y: 145 },
                 { name: 'Усть-Каменогорское', x: 640, y: 155 },
-                { name: 'Риддерское', x: 660, y: 135 },
-                { name: 'Катон-Карагайское', x: 680, y: 175 },
-                { name: 'Талдыкорганское', x: 540, y: 265 },
-                { name: 'Алматинское', x: 500, y: 280 },
+                { name: 'Риддерское', x: 665, y: 135 },
+                { name: 'Катон-Карагайское', x: 690, y: 172 },
+                { name: 'Талдыкорганское', x: 545, y: 265 },
+                { name: 'Алматинское', x: 505, y: 285 },
+                { name: 'Жамбылское', x: 420, y: 292 },
+                { name: 'Туркестанское', x: 340, y: 305 },
               ].map((branch, i) => (
                 <g key={i}>
                   <circle cx={branch.x} cy={branch.y} r="5" fill="#c88c1e" stroke="white" strokeWidth="1.5" style={{ animation: `pin-pulse 3s ease-in-out ${i * 0.2}s infinite` }} />
@@ -493,10 +498,11 @@ export default function HomePage() {
           <div className="reveal from-right">
             <div className="grid grid-cols-1 gap-1.5">
               {[
-                'Алматинское', 'Талдыкорганское', 'Усть-Каменогорское', 'Букебаевское',
+                'Алматинское', 'Талдыкорганское', 'Усть-Каменогорское', 'Букебайское',
                 'Бородулихинское', 'Риддерское', 'Каркаралинское', 'Боровское',
                 'Кокшетауское', 'Павлодарское', 'Костанайское', 'Катон-Карагайское',
-                'Баянаульское', 'Семейское',
+                'Баянаульское', 'Акмолинское', 'Жамбылское', 'Туркестанское',
+                'Жасыл Аймак', 'Западно-Казахстанское',
               ].map((name, i) => (
                 <div key={i} className="flex items-center gap-3 bg-white border border-border px-5 py-3 hover:bg-forest hover:text-white hover:border-forest transition-all group cursor-default rounded-sm">
                   <div className="w-2 h-2 rounded-full bg-amber group-hover:bg-white shrink-0 transition-colors" />

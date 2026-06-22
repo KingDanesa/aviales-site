@@ -50,23 +50,28 @@ export function Navbar() {
             {t('enterprise')}
             <span className="text-[9px] opacity-50 group-hover:rotate-180 transition-transform">▾</span>
           </button>
-          <div className="absolute top-full left-0 mt-2 bg-white border border-border min-w-[220px] py-2 shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto -translate-y-1.5 group-hover:translate-y-0 transition-all duration-200 z-[300]">
-            <Link href="/about" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
-              <span className="text-[15px] w-5 text-center">🏢</span>{t('about')}
-            </Link>
-            <Link href="/leadership" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
-              <span className="text-[15px] w-5 text-center">👤</span>{t('leadership')}
-            </Link>
-            <Link href="/branches" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
-              <span className="text-[15px] w-5 text-center">📍</span>{t('branches')}
-            </Link>
-            <Link href="/equipment" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
-              <span className="text-[15px] w-5 text-center">🚁</span>{t('equipment')}
-            </Link>
-            <hr className="border-border my-1.5" />
-            <Link href="/vacancies" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
-              <span className="text-[15px] w-5 text-center">📋</span>{t('vacancies')}
-            </Link>
+          <div className="absolute top-full left-0 pt-2 min-w-[240px] opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto -translate-y-1.5 group-hover:translate-y-0 transition-all duration-200 z-[300]">
+            <div className="bg-white border border-border py-2 shadow-xl">
+              <Link href="/about" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
+                <span className="text-[15px] w-5 text-center">🏢</span>{t('about')}
+              </Link>
+              <Link href="/structure" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
+                <span className="text-[15px] w-5 text-center">🗂️</span>{t('structure')}
+              </Link>
+              <Link href="/leadership" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
+                <span className="text-[15px] w-5 text-center">👤</span>{t('leadership')}
+              </Link>
+              <Link href="/branches" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
+                <span className="text-[15px] w-5 text-center">📍</span>{t('branches')}
+              </Link>
+              <Link href="/equipment" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
+                <span className="text-[15px] w-5 text-center">🚁</span>{t('equipment')}
+              </Link>
+              <hr className="border-border my-1.5" />
+              <Link href="/vacancies" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
+                <span className="text-[15px] w-5 text-center">📋</span>{t('vacancies')}
+              </Link>
+            </div>
           </div>
         </li>
         {/* State Dropdown */}
@@ -75,16 +80,18 @@ export function Navbar() {
             {t('state')}
             <span className="text-[9px] opacity-50 group-hover:rotate-180 transition-transform">▾</span>
           </button>
-          <div className="absolute top-full left-0 mt-2 bg-white border border-border min-w-[220px] py-2 shadow-xl opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto -translate-y-1.5 group-hover:translate-y-0 transition-all duration-200 z-[300]">
-            <Link href="/state#symbols" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
-              <span className="text-[15px] w-5 text-center">🇰🇿</span>{t('symbols')}
-            </Link>
-            <Link href="/state#message" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
-              <span className="text-[15px] w-5 text-center">📜</span>{t('president')}
-            </Link>
-            <Link href="/state#docs" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
-              <span className="text-[15px] w-5 text-center">📂</span>{t('docs')}
-            </Link>
+          <div className="absolute top-full left-0 pt-2 min-w-[240px] opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto -translate-y-1.5 group-hover:translate-y-0 transition-all duration-200 z-[300]">
+            <div className="bg-white border border-border py-2 shadow-xl">
+              <Link href="/state#symbols" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
+                <span className="text-[15px] w-5 text-center">🇰🇿</span>{t('symbols')}
+              </Link>
+              <Link href="/state#message" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
+                <span className="text-[15px] w-5 text-center">📜</span>{t('president')}
+              </Link>
+              <Link href="/state#docs" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
+                <span className="text-[15px] w-5 text-center">📂</span>{t('docs')}
+              </Link>
+            </div>
           </div>
         </li>
         <li>
@@ -127,6 +134,7 @@ export function Navbar() {
           <Link href="/" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('home')}</Link>
           <Link href="/news" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('news')}</Link>
           <Link href="/about" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('about')}</Link>
+          <Link href="/structure" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('structure')}</Link>
           <Link href="/leadership" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('leadership')}</Link>
           <Link href="/branches" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('branches')}</Link>
           <Link href="/equipment" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('equipment')}</Link>

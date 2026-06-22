@@ -2,25 +2,42 @@
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { useState } from 'react';
 
-const branchesData = [
-  { id: 'almaty', name: 'Алматинское', region: 'Алматинская область', phone: '+7 (727) 346-13-71', area: '1,200,000 га', staff: 28 },
-  { id: 'borovoe', name: 'Боровское', region: 'Акмолинская область', phone: '+7 (716) 253-12-55', area: '850,000 га', staff: 22 },
-  { id: 'karkaralinsk', name: 'Каркаралинское', region: 'Карагандинская область', phone: '+7 (721) 441-23-80', area: '1,100,000 га', staff: 18 },
-  { id: 'bayanaul', name: 'Баянаульское', region: 'Павлодарская область', phone: '+7 (718) 237-14-66', area: '650,000 га', staff: 14 },
-  { id: 'semey', name: 'Семейское', region: 'Восточно-Казахстанская область', phone: '+7 (722) 252-18-90', area: '720,000 га', staff: 20 },
-  { id: 'ridder', name: 'Риддерское', region: 'ВКО, Риддер', phone: '+7 (723) 336-21-77', area: '480,000 га', staff: 12 },
-  { id: 'bukhtarma', name: 'Бухтарминское', region: 'ВКО', phone: '+7 (722) 255-33-44', area: '560,000 га', staff: 15 },
-  { id: 'aksu', name: 'Аксу-Джабаглинское', region: 'Южный Казахстан', phone: '+7 (725) 312-45-88', area: '340,000 га', staff: 10 },
+type Branch = {
+  name: string;
+  region: string;
+  address: string;
+  head?: string;
+  role?: string;
+  phones?: string[];
+  email?: string;
+};
+
+// Авиационные отделения РГКП «Казавиалесоохрана» (18) с начальниками и контактами.
+const branches: Branch[] = [
+  { name: 'Алматинское', region: 'г. Алматы', address: 'г. Алматы, Наурызбайский район, ул. Мереке, 24', head: 'Байшалов Бекзат Ерденович', role: 'Начальник авиаотделения', phones: ['8708 338 6812', '8771 993 6143'], email: 'Almaty@aviales.kz' },
+  { name: 'Усть-Каменогорское', region: 'ВКО', address: 'г. Усть-Каменогорск, ул. Тохтарова, 40/1, офис 307', head: 'Лесной Юрий Николаевич', role: 'Начальник авиаотделения', phones: ['87774118685'], email: 'avialesvko@mail.ru' },
+  { name: 'Костанайское', region: 'Костанайская область', address: 'Костанайская область, Ауликольский район, с. Лесное, Семиозерное ГУ, Калининское лесничество, кв. 109', head: 'Тенизов Арман Бекжанович', role: 'Начальник авиаотделения', phones: ['87776060616'], email: 'tenk2@mail.ru' },
+  { name: 'Риддерское', region: 'ВКО, Риддер', address: 'ВКО, г. Риддер, ул. Полевая, 181а', head: 'Кузьмин Михаил Анатольевич', role: 'Инструктор АПГ', phones: ['8705 417 4701', '8 723 36 3 02 99'], email: 'mihailkuzmin1982@mail.ru' },
+  { name: 'Павлодарское', region: 'Павлодарская область', address: 'Павлодарская область, Щербактинский район, п. Шалдай, ул. Жамбыла, 8', head: 'Шайзатхан Шынгысхан', role: 'Начальник авиаотделения', phones: ['8771 993 61 67', '87071961221'], email: 'pavlodar@aviales.kz' },
+  { name: 'Каркаралинское', region: 'Карагандинская область', address: 'Карагандинская область, Каркаралинский район, г. Каркаралинск, ГНПП Горное лесничество, кв. 126', head: 'Плотников Тимофей Владимирович', role: 'Начальник авиаотделения', phones: ['87719936141'], email: 'timoha23_ru@mail.ru' },
+  { name: 'Талдыкорганское', region: 'Жетысуская область', address: 'Жетысуская область, г. Талдыкорган, ул. Лесная поляна, Кардон №1', head: 'Базарбеков Мурат Кожабекович', role: 'Начальник авиаотделения', phones: ['8702 658 7150'], email: 'Akmolinskaya_g@mail.ru' },
+  { name: 'Боровское', region: 'Акмолинская область', address: 'Акмолинская область, Бурабайский район, п. Сарыбулак, ул. Жайлау, 30', head: 'Загоруйко Виктор Викторович', role: 'Начальник авиаотделения', phones: ['8771 255 7182', '8 716 367 30 40'], email: 'zvv.999@mail.ru' },
+  { name: 'Букебайское', region: 'Абайская область', address: 'Абайская область, Бескарагайский район, п. Букебай, ул. Черемуховая, 15', head: 'Мусин Сапарбек', role: 'Инструктор АПС', phones: ['87716247699'], email: 'bukebai@aviales.kz' },
+  { name: 'Бородулихинское', region: 'Абайская область', address: 'Абайская область, Бородулихинский район, п. Бородулиха, ул. Лесхоз, 54', head: 'Лебединский Александр Петрович', role: 'Начальник авиаотделения', phones: ['87053181750', '8 723 51 2 44 43'], email: 'lebedinskaya_1973@mail.ru' },
+  { name: 'Жамбылское', region: 'Жамбылская область', address: 'Жамбылская область, Мойынкумский район, п. Мойынкум, ул. Куанышбаева, 33', head: 'Дандыбаев Ермек', role: 'Начальник авиаотделения', phones: ['87471367236'], email: 'jambyl@aviales.kz' },
+  { name: 'Катон-Карагайское', region: 'ВКО', address: 'ВКО, Катон-Карагайский район, с. Катон-Карагай, аэропорт', head: 'Василков В. В.', role: 'Начальник авиаотделения', phones: ['8 705 499 1117'], email: 'avialesvko@mail.ru' },
+  { name: 'Баянаульское', region: 'Павлодарская область', address: 'Павлодарская область, Баянаульский район, п. Кардон Жасыбай', head: 'Сатпаев Жасулан', role: 'Начальник авиаотделения', phones: ['8 707 268 1626', '8 718 40 9 07 71'], email: 'bayanaul@aviales.kz' },
+  { name: 'Кокшетауское', region: 'Акмолинская область', address: 'Акмолинская область, Зерендинский район, с. Красный Кардон, ул. Орталык, 62', head: 'Умаров Ренат Сеилханович', role: 'Начальник авиаотделения', phones: ['8777 480 8217', '8 716 32 25500'], email: 'Kokshetau@aviales.kz' },
+  { name: 'Акмолинское', region: 'Акмолинская область', address: 'Акмолинская область, Аккольский район, г. Акколь, ул. Береговая, 104', head: 'Лесной Николай Николаевич', role: 'Начальник авиаотделения', phones: ['87719936173'], email: 'nikolailesnoi1@bk.ru' },
+  { name: 'Туркестанское', region: 'Туркестанская область', address: 'Туркестанская область, Тюлькубасский район, с.о. Жабаглынский, с. Жабаглы, кв. 106 (уч. 532)', head: 'Тулепбергенов Бауржан', role: 'Начальник авиаотделения', phones: ['87005588242'], email: 'turkesran@aviales.kz' },
+  { name: '«Жасыл Аймак»', region: 'Акмолинская область', address: 'Акмолинская область, Целиноградский район, с. Шубар, Кызылжарское лесничество, кв. №79, выдел 73', head: 'Абдрахманов Дастан Сагындыкович', role: 'Командир Северного авиазвена', phones: ['8 705 781 1132'], email: 'zhasyla@list.ru' },
+  { name: 'Западно-Казахстанское', region: 'Западно-Казахстанская область', address: 'ЗКО, Акжаикский район, с.о. Чапаевский, с. Чапаев, ул. О. Исаева, уч. 131', head: 'Мурат Газымжан', role: 'Начальник авиаотделения', phones: ['87002150538'], email: 'zapadaviales@qmail.com' },
 ];
 
 export default function BranchesPage() {
   const t = useTranslations();
   useScrollReveal();
-  const [selected, setSelected] = useState('almaty');
-
-  const branch = branchesData.find(b => b.id === selected)!;
 
   return (
     <>
@@ -30,72 +47,43 @@ export default function BranchesPage() {
           <span className="text-white/20">›</span><span>{t('nav.branches')}</span>
         </div>
         <h1 className="text-[clamp(28px,4vw,52px)] font-extrabold text-white tracking-tight">{t('nav.branches')}</h1>
+        <p className="mt-3 text-[15px] text-white/55 max-w-[620px] leading-relaxed">{t('branchesPage.subtitle')}</p>
       </div>
 
-      {/* SVG Map */}
       <div className="bg-sky px-8 md:px-14 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10">
-          {/* Map placeholder */}
-          <div className="bg-white border border-border p-8 relative min-h-[400px] reveal from-left">
-            <svg viewBox="0 0 800 400" className="w-full h-full" fill="none">
-              <path d="M50 200 Q100 120 200 140 Q300 100 400 130 Q500 80 600 120 Q700 100 750 160 Q780 200 750 260 Q700 320 600 300 Q500 340 400 290 Q300 320 200 280 Q100 300 50 200Z" fill="#d4e8dc" stroke="#3d7a55" strokeWidth="1.5" opacity="0.5" />
-              {branchesData.map((b, i) => {
-                const positions: Record<string, { x: number; y: number }> = {
-                  almaty: { x: 520, y: 280 }, borovoe: { x: 380, y: 140 }, karkaralinsk: { x: 450, y: 200 },
-                  bayanaul: { x: 480, y: 150 }, semey: { x: 580, y: 180 }, ridder: { x: 640, y: 150 },
-                  bukhtarma: { x: 610, y: 200 }, aksu: { x: 340, y: 300 },
-                };
-                const pos = positions[b.id];
-                return (
-                  <g key={i} onClick={() => setSelected(b.id)} className="cursor-pointer">
-                    <circle cx={pos.x} cy={pos.y} r={selected === b.id ? 10 : 6} fill={selected === b.id ? '#c88c1e' : '#3d7a55'} stroke="white" strokeWidth="2" className="transition-all" />
-                    {selected === b.id && <circle cx={pos.x} cy={pos.y} r="16" fill="none" stroke="#c88c1e" strokeWidth="1" opacity="0.5" />}
-                    <text x={pos.x} y={pos.y - 14} textAnchor="middle" className="text-[9px] font-bold fill-forest">{b.name}</text>
-                  </g>
-                );
-              })}
-            </svg>
-          </div>
-
-          {/* Branch Info */}
-          <div className="reveal from-right">
-            <div className="bg-white border border-border p-8">
-              <div className="text-[24px] font-extrabold text-forest mb-1">{branch.name}</div>
-              <div className="text-[13px] text-text-dim mb-6">{branch.region}</div>
-              <div className="flex flex-col gap-4">
-                <div className="flex gap-4 items-center">
-                  <div className="w-10 h-10 bg-sky flex items-center justify-center text-lg shrink-0">📞</div>
-                  <div>
-                    <div className="text-[10px] text-text-dim font-bold tracking-widest uppercase">{t('contactsPage.phone')}</div>
-                    <a href={`tel:${branch.phone}`} className="text-[14px] font-semibold text-forest no-underline">{branch.phone}</a>
-                  </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 reveal-stagger">
+          {branches.map((b, i) => (
+            <div key={i} className="bg-white border border-border p-6 flex flex-col hover:shadow-xl hover:-translate-y-0.5 transition-all">
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div>
+                  <div className="text-[17px] font-extrabold text-forest leading-tight">{b.name}</div>
+                  <div className="text-[11px] text-text-dim font-semibold tracking-wide uppercase mt-1">{b.region}</div>
                 </div>
-                <div className="flex gap-4 items-center">
-                  <div className="w-10 h-10 bg-sky flex items-center justify-center text-lg shrink-0">🌲</div>
-                  <div>
-                    <div className="text-[10px] text-text-dim font-bold tracking-widest uppercase">Площадь охраны</div>
-                    <div className="text-[14px] font-semibold text-forest">{branch.area}</div>
-                  </div>
-                </div>
-                <div className="flex gap-4 items-center">
-                  <div className="w-10 h-10 bg-sky flex items-center justify-center text-lg shrink-0">👥</div>
-                  <div>
-                    <div className="text-[10px] text-text-dim font-bold tracking-widest uppercase">Сотрудников</div>
-                    <div className="text-[14px] font-semibold text-forest">{branch.staff}</div>
-                  </div>
-                </div>
+                <span className="w-9 h-9 bg-sky flex items-center justify-center text-base shrink-0">📍</span>
               </div>
+
+              <div className="text-[13px] text-text-mid leading-relaxed mb-4 flex-1">{b.address}</div>
+
+              {b.head && (
+                <div className="border-t border-border pt-4 mt-auto">
+                  <div className="text-[10px] text-text-dim font-bold tracking-widest uppercase mb-1">{b.role}</div>
+                  <div className="text-[14px] font-bold text-forest mb-2.5">{b.head}</div>
+                  <div className="flex flex-col gap-1.5">
+                    {b.phones?.map((p, j) => (
+                      <a key={j} href={`tel:${p.replace(/[^+\d]/g, '')}`} className="flex items-center gap-2 text-[13px] font-semibold text-forest no-underline hover:text-amber-dark">
+                        <span className="text-text-dim">📞</span>{p}
+                      </a>
+                    ))}
+                    {b.email && (
+                      <a href={`mailto:${b.email}`} className="flex items-center gap-2 text-[13px] font-semibold text-forest-light no-underline hover:text-amber-dark break-all">
+                        <span className="text-text-dim">✉️</span>{b.email}
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
-            {/* Branch List */}
-            <div className="mt-4 flex flex-col gap-1">
-              {branchesData.map((b) => (
-                <button key={b.id} onClick={() => setSelected(b.id)} className={`text-left px-5 py-3 text-[13px] font-semibold border-none cursor-pointer font-sans transition-all ${selected === b.id ? 'bg-forest text-white' : 'bg-white text-text-mid hover:bg-sky'} border border-border`}>
-                  {b.name}
-                  <span className="text-[11px] opacity-50 ml-2">{b.region}</span>
-                </button>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </>

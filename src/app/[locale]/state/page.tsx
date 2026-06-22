@@ -33,17 +33,42 @@ export default function StatePage() {
           <div id="symbols" className="reveal from-bottom visible">
             <h2 className="text-[clamp(28px,3.5vw,48px)] font-extrabold text-forest mb-8">{t('nav.symbols')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { name: 'Государственный Флаг', desc: 'Государственный Флаг Республики Казахстан представляет собой голубое полотнище с изображением солнца и парящего орла.', emoji: '🇰🇿' },
-                { name: 'Государственный Герб', desc: 'Герб имеет форму круга и символизирует жизнь, политический курс и мирное сосуществование народов.', emoji: '🛡️' },
-                { name: 'Государственный Гимн', desc: 'Гимн Республики Казахстан утверждён 7 января 2006 года. Автор текста — Нурсултан Назарбаев, Жумекен Нажимеденов.', emoji: '🎵' },
-              ].map((s, i) => (
-                <div key={i} className="border border-border p-8 hover:shadow-lg transition-shadow">
-                  <div className="text-5xl mb-5">{s.emoji}</div>
-                  <h3 className="text-[18px] font-extrabold text-forest mb-3">{s.name}</h3>
-                  <p className="text-[13px] text-text-dim leading-relaxed">{s.desc}</p>
+              {/* Flag */}
+              <div className="border border-border overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
+                <div className="bg-sky flex items-center justify-center p-6 aspect-[4/3]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/kz-flag.svg" alt={t('statePage.flagTitle')} className="w-full h-full object-contain shadow-md" />
                 </div>
-              ))}
+                <div className="p-7">
+                  <h3 className="text-[18px] font-extrabold text-forest mb-3">{t('statePage.flagTitle')}</h3>
+                  <p className="text-[13px] text-text-dim leading-relaxed">{t('statePage.flagDesc')}</p>
+                </div>
+              </div>
+              {/* Emblem */}
+              <div className="border border-border overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
+                <div className="bg-sky flex items-center justify-center p-6 aspect-[4/3]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src="/kz-emblem.svg" alt={t('statePage.emblemTitle')} className="h-full object-contain" />
+                </div>
+                <div className="p-7">
+                  <h3 className="text-[18px] font-extrabold text-forest mb-3">{t('statePage.emblemTitle')}</h3>
+                  <p className="text-[13px] text-text-dim leading-relaxed">{t('statePage.emblemDesc')}</p>
+                </div>
+              </div>
+              {/* Anthem */}
+              <div className="border border-border overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
+                <div className="bg-forest flex items-center justify-center p-6 aspect-[4/3]">
+                  <div className="text-7xl">🎵</div>
+                </div>
+                <div className="p-7">
+                  <h3 className="text-[18px] font-extrabold text-forest mb-3">{t('statePage.anthemTitle')}</h3>
+                  <p className="text-[13px] text-text-dim leading-relaxed mb-4">{t('statePage.anthemDesc')}</p>
+                  <audio controls preload="none" controlsList="nodownload" className="w-full">
+                    <source src="/kz-anthem.mp3" type="audio/mpeg" />
+                    <source src="/kz-anthem.ogg" type="audio/ogg" />
+                  </audio>
+                </div>
+              </div>
             </div>
           </div>
         )}

@@ -4,6 +4,7 @@
     "news": "News",
     "enterprise": "Enterprise",
     "about": "About",
+    "structure": "Enterprise Structure",
     "leadership": "Leadership",
     "branches": "Branches",
     "equipment": "Aviation Equipment",
@@ -160,9 +161,29 @@
     "functions": "Main Functions",
     "functionsTitle": "Our Tasks",
     "history": "Enterprise History",
-    "historyTitle": "Guarding Forests Since 1948",
+    "historyTitle": "Guarding Forests Since 1978",
     "gallery": "Photo Gallery",
     "galleryTitle": "Our Service at Work"
+  },
+  "structurePage": {
+    "subtitle": "Organizational structure of RSPE «Kazavialesookhrana»",
+    "hint": "Click the chart to open it at full size and view the details.",
+    "openFull": "Open full size"
+  },
+  "statePage": {
+    "flagTitle": "State Flag",
+    "flagDesc": "The State Flag of the Republic of Kazakhstan is a sky-blue cloth with an image of the sun, beneath which a steppe eagle soars.",
+    "emblemTitle": "State Emblem",
+    "emblemDesc": "The emblem is circular, featuring a shanyrak and tulpars. It symbolizes life, unity, and the peaceful coexistence of peoples.",
+    "anthemTitle": "State Anthem",
+    "anthemDesc": "The anthem of the Republic of Kazakhstan, «Meniñ Qazaqstanym», was adopted on 7 January 2006. Authors — Zhumeken Nazhimedenov and Nursultan Nazarbayev."
+  },
+  "branchesPage": {
+    "subtitle": "18 aviation branches across the Republic of Kazakhstan — with addresses and head contacts"
+  },
+  "equipmentPage": {
+    "planes": "Airplanes",
+    "helicopters": "Helicopters"
   },
   "admin": {
     "dashboard": "Dashboard",
