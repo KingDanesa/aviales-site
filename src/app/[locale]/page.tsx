@@ -5,6 +5,8 @@ import { Link } from '@/i18n/routing';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { BranchesMap } from '@/components/BranchesMap';
+import { HomeContact } from '@/components/HomeContact';
 
 const services = [
   { icon: '🔥', key: 's1' },
@@ -446,76 +448,11 @@ export default function HomePage() {
           От Костаная на севере до Алматы на юге — наши подразделения обеспечивают охрану лесных массивов на всей территории республики
         </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10">
-          {/* Map */}
-          <div className="bg-white border border-border p-6 md:p-8 relative min-h-[380px] reveal from-left rounded-sm">
-            <svg viewBox="0 0 800 380" className="w-full h-full" fill="none">
-              {/* Kazakhstan outline — simplified */}
-              <path d="M60 180 Q80 120 140 110 Q200 80 280 100 Q340 70 420 90 Q500 60 560 80 Q640 60 700 100 Q750 120 740 160 Q760 200 740 240 Q720 290 660 280 Q600 310 520 290 Q460 320 400 300 Q340 330 280 300 Q200 320 140 280 Q80 260 60 180Z" fill="#d4e8dc" stroke="#3d7a55" strokeWidth="1.2" opacity="0.6" />
-              {/* Grid lines for realism */}
-              <line x1="100" y1="100" x2="100" y2="320" stroke="#3d7a55" strokeWidth="0.15" opacity="0.3" />
-              <line x1="200" y1="80" x2="200" y2="320" stroke="#3d7a55" strokeWidth="0.15" opacity="0.3" />
-              <line x1="300" y1="70" x2="300" y2="330" stroke="#3d7a55" strokeWidth="0.15" opacity="0.3" />
-              <line x1="400" y1="60" x2="400" y2="320" stroke="#3d7a55" strokeWidth="0.15" opacity="0.3" />
-              <line x1="500" y1="60" x2="500" y2="310" stroke="#3d7a55" strokeWidth="0.15" opacity="0.3" />
-              <line x1="600" y1="60" x2="600" y2="310" stroke="#3d7a55" strokeWidth="0.15" opacity="0.3" />
-              <line x1="700" y1="80" x2="700" y2="280" stroke="#3d7a55" strokeWidth="0.15" opacity="0.3" />
-              <line x1="60" y1="150" x2="750" y2="150" stroke="#3d7a55" strokeWidth="0.15" opacity="0.3" />
-              <line x1="60" y1="200" x2="750" y2="200" stroke="#3d7a55" strokeWidth="0.15" opacity="0.3" />
-              <line x1="60" y1="250" x2="740" y2="250" stroke="#3d7a55" strokeWidth="0.15" opacity="0.3" />
+        <BranchesMap />
 
-              {/* Branch dots */}
-              {[
-                { name: 'Западно-Казахстанское', x: 100, y: 170 },
-                { name: 'Костанайское', x: 230, y: 115 },
-                { name: 'Боровское', x: 345, y: 120 },
-                { name: 'Кокшетауское', x: 375, y: 140 },
-                { name: 'Акмолинское', x: 360, y: 132 },
-                { name: 'Жасыл Аймак', x: 400, y: 152 },
-                { name: 'Павлодарское', x: 475, y: 125 },
-                { name: 'Баянаульское', x: 455, y: 162 },
-                { name: 'Каркаралинское', x: 425, y: 200 },
-                { name: 'Букебайское', x: 525, y: 155 },
-                { name: 'Бородулихинское', x: 565, y: 145 },
-                { name: 'Усть-Каменогорское', x: 640, y: 155 },
-                { name: 'Риддерское', x: 665, y: 135 },
-                { name: 'Катон-Карагайское', x: 690, y: 172 },
-                { name: 'Талдыкорганское', x: 545, y: 265 },
-                { name: 'Алматинское', x: 505, y: 285 },
-                { name: 'Жамбылское', x: 420, y: 292 },
-                { name: 'Туркестанское', x: 340, y: 305 },
-              ].map((branch, i) => (
-                <g key={i}>
-                  <circle cx={branch.x} cy={branch.y} r="5" fill="#c88c1e" stroke="white" strokeWidth="1.5" style={{ animation: `pin-pulse 3s ease-in-out ${i * 0.2}s infinite` }} />
-                  <circle cx={branch.x} cy={branch.y} r="10" fill="none" stroke="#c88c1e" strokeWidth="0.5" opacity="0.3" />
-                  <text x={branch.x} y={branch.y - 10} textAnchor="middle" className="text-[7px] font-bold" fill="#1a3a28" opacity="0.8">{branch.name}</text>
-                </g>
-              ))}
-            </svg>
-          </div>
-
-          {/* Branch list */}
-          <div className="reveal from-right">
-            <div className="grid grid-cols-1 gap-1.5">
-              {[
-                'Алматинское', 'Талдыкорганское', 'Усть-Каменогорское', 'Букебайское',
-                'Бородулихинское', 'Риддерское', 'Каркаралинское', 'Боровское',
-                'Кокшетауское', 'Павлодарское', 'Костанайское', 'Катон-Карагайское',
-                'Баянаульское', 'Акмолинское', 'Жамбылское', 'Туркестанское',
-                'Жасыл Аймак', 'Западно-Казахстанское',
-              ].map((name, i) => (
-                <div key={i} className="flex items-center gap-3 bg-white border border-border px-5 py-3 hover:bg-forest hover:text-white hover:border-forest transition-all group cursor-default rounded-sm">
-                  <div className="w-2 h-2 rounded-full bg-amber group-hover:bg-white shrink-0 transition-colors" />
-                  <span className="text-[13px] font-semibold text-text group-hover:text-white transition-colors">{name}</span>
-                  <span className="text-[11px] text-text-dim group-hover:text-white/50 ml-auto transition-colors">авиаотделение</span>
-                </div>
-              ))}
-            </div>
-            <Link href="/branches" className="mt-6 inline-flex items-center gap-2 px-7 py-3.5 text-[12.5px] font-bold tracking-wider uppercase no-underline bg-forest text-white rounded-sm hover:bg-forest-mid hover:-translate-y-0.5 transition-all">
-              Все отделения →
-            </Link>
-          </div>
-        </div>
+        <Link href="/branches" className="mt-8 inline-flex items-center gap-2 px-7 py-3.5 text-[12.5px] font-bold tracking-wider uppercase no-underline bg-forest text-white rounded-sm hover:bg-forest-mid hover:-translate-y-0.5 transition-all">
+          Все отделения →
+        </Link>
       </section>
 
       {/* ═══ NEWS ═══ */}
@@ -588,18 +525,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ CTA ═══ */}
-      <div className="bg-forest px-8 md:px-14 py-16 md:py-[72px] flex flex-col md:flex-row items-center justify-between gap-10 relative overflow-hidden">
-        <div className="absolute -right-20 -top-20 w-[360px] h-[360px] rounded-full border border-white/5" />
-        <div className="absolute right-10 -bottom-[120px] w-[240px] h-[240px] rounded-full border border-white/[0.04]" />
-        <div className="reveal from-left relative z-[1]">
-          <h2 className="text-[clamp(24px,3vw,36px)] font-extrabold text-white tracking-tight mb-2">{t('cta.title')}</h2>
-          <p className="text-[14px] text-white/45">{t('cta.subtitle')}</p>
-        </div>
-        <Link href="/contacts" className="relative z-[1] inline-flex items-center gap-2 px-7 py-3.5 text-[12.5px] font-bold tracking-wider uppercase no-underline bg-transparent text-white/70 border border-white/25 rounded-sm hover:border-white/60 hover:text-white transition-all reveal from-right">
-          {t('cta.btn')}
-        </Link>
-      </div>
+      {/* ═══ CONTACT (form + map) ═══ */}
+      <HomeContact />
     </div>
   );
 }

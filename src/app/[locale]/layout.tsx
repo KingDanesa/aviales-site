@@ -5,6 +5,7 @@ import '../globals.css';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Chatbot } from '@/components/Chatbot';
+import { ScrollToTop } from '@/components/ScrollToTop';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -35,6 +36,7 @@ export default async function LocaleLayout({
           <main className="pt-[76px] page-in">{children}</main>
           <Footer />
           <Chatbot />
+          <ScrollToTop />
         </NextIntlClientProvider>
       </body>
     </html>
