@@ -1,52 +1,76 @@
 'use client';
-import { useState } from 'react';
-import { branches, KZ_MAP } from '@/lib/branches';
+import 'leaflet/dist/leaflet.css';
+import { useEffect, useRef, useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+import { branches, tr } from '@/lib/branches';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function BranchesMap() {
-  const [selectedId, setSelectedId] = useState<string>('almaty');
+  const locale = useLocale();
+  const t = useTranslations('branchesMap');
+  const [selectedId, setSelectedId] = useState('almaty');
   const selected = branches.find((b) => b.id === selectedId)!;
 
+  const mapElRef = useRef<HTMLDivElement>(null);
+  const markersRef = useRef<Record<string, { m: any; icon: (a: boolean) => any }>>({});
+  const localeRef = useRef(locale);
+  localeRef.current = locale;
+
+  // Init map once
+  useEffect(() => {
+    let map: any;
+    let cancelled = false;
+    import('leaflet').then((mod: any) => {
+      const L = mod.default ?? mod;
+      if (cancelled || !mapElRef.current || (mapElRef.current as any)._leaflet_id) return;
+      map = L.map(mapElRef.current, { scrollWheelZoom: false }).setView([48.4, 67.5], 5);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; OpenStreetMap',
+      }).addTo(map);
+
+      const makeIcon = (active: boolean) =>
+        L.divIcon({
+          className: 'branch-marker',
+          html: `<span class="branch-pin${active ? ' active' : ''}"></span>`,
+          iconSize: active ? [24, 24] : [16, 16],
+          iconAnchor: active ? [12, 12] : [8, 8],
+        });
+
+      branches.forEach((b) => {
+        const m = L.marker([b.lat, b.lng], { icon: makeIcon(b.id === selectedId) }).addTo(map);
+        m.bindTooltip(tr(b.name, localeRef.current), { direction: 'top', offset: [0, -8] });
+        m.on('click', () => setSelectedId(b.id));
+        markersRef.current[b.id] = { m, icon: makeIcon };
+      });
+    });
+    return () => {
+      cancelled = true;
+      if (map) map.remove();
+      markersRef.current = {};
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Update marker highlight on selection
+  useEffect(() => {
+    Object.entries(markersRef.current).forEach(([id, obj]) => obj.m.setIcon(obj.icon(id === selectedId)));
+  }, [selectedId]);
+
+  // Update tooltips on locale change
+  useEffect(() => {
+    Object.entries(markersRef.current).forEach(([id, obj]) => {
+      const b = branches.find((x) => x.id === id)!;
+      obj.m.setTooltipContent(tr(b.name, locale));
+    });
+  }, [locale]);
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-6">
       {/* Map */}
-      <div className="bg-white border border-border p-4 md:p-6 rounded-sm reveal from-left">
-        <svg viewBox={KZ_MAP.viewBox} className="w-full h-auto" role="img" aria-label="Карта авиаотделений Казахстана">
-          <path d={KZ_MAP.path} fill="#d9ece0" stroke="#3d7a55" strokeWidth="1.4" strokeLinejoin="round" />
-          {branches.map((b) => {
-            const active = b.id === selectedId;
-            return (
-              <g
-                key={b.id}
-                onClick={() => setSelectedId(b.id)}
-                className="cursor-pointer"
-                style={{ transition: 'all .2s' }}
-              >
-                <title>{b.name} авиаотделение</title>
-                {active && (
-                  <circle cx={b.cx} cy={b.cy} r="18" fill="none" stroke="#c88c1e" strokeWidth="2" opacity="0.45">
-                    <animate attributeName="r" values="12;22;12" dur="2s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite" />
-                  </circle>
-                )}
-                <circle
-                  cx={b.cx}
-                  cy={b.cy}
-                  r={active ? 11 : 7}
-                  fill={active ? '#c88c1e' : '#3d7a55'}
-                  stroke="white"
-                  strokeWidth="2.5"
-                  className="hover:r-[10]"
-                />
-                {active && (
-                  <text x={b.cx} y={b.cy - 18} textAnchor="middle" fontSize="15" fontWeight="700" fill="#1a3a28" stroke="white" strokeWidth="3.5" paintOrder="stroke" style={{ pointerEvents: 'none' }}>
-                    {b.name}
-                  </text>
-                )}
-              </g>
-            );
-          })}
-        </svg>
-        <div className="text-[12px] text-text-dim mt-2 text-center">Нажмите на точку, чтобы увидеть данные авиаотделения</div>
+      <div className="reveal from-left">
+        <div ref={mapElRef} className="w-full h-[420px] md:h-[540px] rounded-sm border border-border z-0" />
+        <div className="text-[12px] text-text-dim mt-2 text-center">{t('hint')}</div>
       </div>
 
       {/* Info panel */}
@@ -54,21 +78,21 @@ export function BranchesMap() {
         <div className="bg-white border border-border p-7 rounded-sm h-full flex flex-col">
           <div className="flex items-start justify-between gap-3 mb-4">
             <div>
-              <div className="text-[22px] font-extrabold text-forest leading-tight">{selected.name}</div>
-              <div className="text-[12px] text-text-dim font-semibold tracking-wide uppercase mt-1">авиационное отделение</div>
+              <div className="text-[22px] font-extrabold text-forest leading-tight">{tr(selected.name, locale)}</div>
+              <div className="text-[12px] text-text-dim font-semibold tracking-wide uppercase mt-1">{t('subtitle')}</div>
             </div>
             <span className="w-10 h-10 bg-amber/15 text-amber-dark flex items-center justify-center text-lg shrink-0 rounded-sm">📍</span>
           </div>
 
           <div className="flex flex-col gap-4">
             <div>
-              <div className="text-[10px] text-text-dim font-bold tracking-widest uppercase mb-1">Адрес</div>
-              <div className="text-[13.5px] text-text-mid leading-relaxed">{selected.address}</div>
+              <div className="text-[10px] text-text-dim font-bold tracking-widest uppercase mb-1">{t('address')}</div>
+              <div className="text-[13.5px] text-text-mid leading-relaxed">{tr(selected.address, locale)}</div>
             </div>
 
             {selected.head && (
               <div>
-                <div className="text-[10px] text-text-dim font-bold tracking-widest uppercase mb-1">{selected.role}</div>
+                <div className="text-[10px] text-text-dim font-bold tracking-widest uppercase mb-1">{selected.role ? tr(selected.role, locale) : ''}</div>
                 <div className="text-[14px] font-bold text-forest">{selected.head}</div>
               </div>
             )}
@@ -97,7 +121,7 @@ export function BranchesMap() {
                   b.id === selectedId ? 'bg-forest text-white border-forest' : 'bg-white text-text-mid border-border hover:bg-sky'
                 }`}
               >
-                {b.name}
+                {tr(b.name, locale)}
               </button>
             ))}
           </div>

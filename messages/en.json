@@ -69,6 +69,22 @@
     "subtitle": "Almaty, Abay St. 32/2 · +7 (727) 346-13-71 · airbar@list.ru",
     "btn": "Contacts"
   },
+  "homeFleet": {
+    "eyebrow": "Aviation Fleet",
+    "title": "Our fleet of aircraft",
+    "more": "More about equipment"
+  },
+  "homeGeo": {
+    "eyebrow": "Geography of Presence",
+    "title": "18 aviation branches across Kazakhstan",
+    "desc": "From Kostanay in the north to Almaty in the south — our units protect forests across the entire territory of the republic",
+    "all": "All branches"
+  },
+  "branchesMap": {
+    "hint": "Click a marker to see the aviation branch details",
+    "subtitle": "aviation branch",
+    "address": "Address"
+  },
   "footer": {
     "desc": "The only state enterprise in the Republic of Kazakhstan for aerial forest protection. Almaty, Abay St. 32/2",
     "enterprise": "Enterprise",

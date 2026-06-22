@@ -220,3 +220,30 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(26, 58, 40, 0.35);
 }
+/* Leaflet branch map markers */
+.branch-marker {
+  background: transparent;
+  border: 0;
+}
+.branch-pin {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #3d7a55;
+  border: 2.5px solid #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s;
+}
+.branch-pin.active {
+  width: 24px;
+  height: 24px;
+  background: #c88c1e;
+  box-shadow: 0 0 0 4px rgba(200, 140, 30, 0.3), 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+/* keep Leaflet panes/controls below the fixed navbar (z-200) */
+.leaflet-pane,
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 1 !important;
+}

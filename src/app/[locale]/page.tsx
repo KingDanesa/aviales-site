@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { BranchesMap } from '@/components/BranchesMap';
 import { HomeContact } from '@/components/HomeContact';
+import { tr } from '@/lib/branches';
 
 const services = [
   { icon: '🔥', key: 's1' },
@@ -400,36 +401,36 @@ export default function HomePage() {
 
         <div className="relative z-[1]">
           <div className="text-[11px] tracking-[0.18em] uppercase font-bold text-amber mb-4 flex items-center gap-3 reveal from-bottom">
-            <span className="w-7 h-0.5 bg-amber shrink-0" />Авиационный парк
+            <span className="w-7 h-0.5 bg-amber shrink-0" />{t('homeFleet.eyebrow')}
           </div>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
-            <h2 className="text-[clamp(28px,3.5vw,48px)] font-extrabold leading-[1.05] tracking-tight text-white reveal from-bottom" style={{ transitionDelay: '.1s', textWrap: 'balance' as never }}>
-              Наш парк<br />воздушных судов
+            <h2 className="text-[clamp(28px,3.5vw,48px)] font-extrabold leading-[1.05] tracking-tight text-white reveal from-bottom max-w-[420px]" style={{ transitionDelay: '.1s', textWrap: 'balance' as never }}>
+              {t('homeFleet.title')}
             </h2>
             <Link href="/equipment" className="inline-flex items-center gap-1.5 no-underline text-[13px] font-bold text-white/60 hover:text-white hover:gap-3 transition-all reveal from-right">
-              Подробнее о технике →
+              {t('homeFleet.more')} →
             </Link>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 reveal-stagger">
             {[
-              { name: 'Ан-2', country: 'СССР', type: 'Самолёт', desc: 'Лёгкий многоцелевой самолёт-биплан для авиапатрулирования и доставки парашютистов-пожарных.', icon: '✈️' },
-              { name: 'PA-68 «Partenavia»', country: 'Италия', type: 'Самолёт', desc: 'Лёгкий двухмоторный самолёт для авиационного наблюдения и патрулирования лесов.', icon: '✈️' },
-              { name: 'Ми-8', country: 'Россия', type: 'Вертолёт', desc: 'Многоцелевой средний вертолёт. Основная рабочая машина для тушения пожаров и доставки десанта.', icon: '🚁' },
-              { name: 'Ми-2', country: 'Россия / Польша', type: 'Вертолёт', desc: 'Лёгкий многоцелевой вертолёт для патрулирования и разведки лесных массивов.', icon: '🚁' },
-              { name: 'EC-130', country: 'Франция', type: 'Вертолёт', desc: 'Лёгкий вертолёт Airbus для наблюдения и мониторинга пожарной обстановки.', icon: '🚁' },
-              { name: 'EC-145', country: 'Франция / Германия', type: 'Вертолёт', desc: 'Двухдвигательный вертолёт для доставки десанта и решения оперативных задач.', icon: '🚁' },
-              { name: 'AS-350', country: 'Франция', type: 'Вертолёт', desc: 'Лёгкий вертолёт Écureuil с высокой манёвренностью для патрулирования.', icon: '🚁' },
-              { name: 'BO-105', country: 'Германия', type: 'Вертолёт', desc: 'Лёгкий многоцелевой вертолёт с высокой манёвренностью для сложного рельефа.', icon: '🚁' },
+              { name: 'Ан-2', country: { ru: 'СССР', kz: 'КСРО', en: 'USSR' }, type: { ru: 'Самолёт', kz: 'Ұшақ', en: 'Airplane' }, desc: { ru: 'Лёгкий многоцелевой самолёт-биплан для авиапатрулирования и доставки парашютистов-пожарных.', kz: 'Авиапатрульдеу мен парашютист-өрт сөндірушілерді жеткізуге арналған жеңіл көпмақсатты биплан ұшақ.', en: 'Light multipurpose biplane for aerial patrol and delivery of smokejumpers.' }, icon: '✈️' },
+              { name: 'PA-68 «Partenavia»', country: { ru: 'Италия', kz: 'Италия', en: 'Italy' }, type: { ru: 'Самолёт', kz: 'Ұшақ', en: 'Airplane' }, desc: { ru: 'Лёгкий двухмоторный самолёт для авиационного наблюдения и патрулирования лесов.', kz: 'Авиациялық бақылау мен орманды патрульдеуге арналған жеңіл екі қозғалтқышты ұшақ.', en: 'Light twin-engine aircraft for aerial observation and forest patrol.' }, icon: '✈️' },
+              { name: 'Ми-8', country: { ru: 'Россия', kz: 'Ресей', en: 'Russia' }, type: { ru: 'Вертолёт', kz: 'Тікұшақ', en: 'Helicopter' }, desc: { ru: 'Многоцелевой средний вертолёт. Основная рабочая машина для тушения пожаров и доставки десанта.', kz: 'Көпмақсатты орта тікұшақ. Өрт сөндіру мен десант жеткізудің негізгі көлігі.', en: 'Multipurpose medium helicopter. The main workhorse for firefighting and crew delivery.' }, icon: '🚁' },
+              { name: 'Ми-2', country: { ru: 'Россия / Польша', kz: 'Ресей / Польша', en: 'Russia / Poland' }, type: { ru: 'Вертолёт', kz: 'Тікұшақ', en: 'Helicopter' }, desc: { ru: 'Лёгкий многоцелевой вертолёт для патрулирования и разведки лесных массивов.', kz: 'Орман алқаптарын патрульдеу мен барлауға арналған жеңіл көпмақсатты тікұшақ.', en: 'Light multipurpose helicopter for patrol and reconnaissance of forests.' }, icon: '🚁' },
+              { name: 'EC-130', country: { ru: 'Франция', kz: 'Франция', en: 'France' }, type: { ru: 'Вертолёт', kz: 'Тікұшақ', en: 'Helicopter' }, desc: { ru: 'Лёгкий вертолёт Airbus для наблюдения и мониторинга пожарной обстановки.', kz: 'Өрт жағдайын бақылау мен мониторингке арналған жеңіл Airbus тікұшағы.', en: 'Light Airbus helicopter for observation and fire monitoring.' }, icon: '🚁' },
+              { name: 'EC-145', country: { ru: 'Франция / Германия', kz: 'Франция / Германия', en: 'France / Germany' }, type: { ru: 'Вертолёт', kz: 'Тікұшақ', en: 'Helicopter' }, desc: { ru: 'Двухдвигательный вертолёт для доставки десанта и решения оперативных задач.', kz: 'Десант жеткізу мен жедел міндеттерді шешуге арналған екі қозғалтқышты тікұшақ.', en: 'Twin-engine helicopter for crew delivery and operational tasks.' }, icon: '🚁' },
+              { name: 'AS-350', country: { ru: 'Франция', kz: 'Франция', en: 'France' }, type: { ru: 'Вертолёт', kz: 'Тікұшақ', en: 'Helicopter' }, desc: { ru: 'Лёгкий вертолёт Écureuil с высокой манёвренностью для патрулирования.', kz: 'Патрульдеуге арналған жоғары маневрлі жеңіл Écureuil тікұшағы.', en: 'Light, highly maneuverable Écureuil helicopter for patrol.' }, icon: '🚁' },
+              { name: 'BO-105', country: { ru: 'Германия', kz: 'Германия', en: 'Germany' }, type: { ru: 'Вертолёт', kz: 'Тікұшақ', en: 'Helicopter' }, desc: { ru: 'Лёгкий многоцелевой вертолёт с высокой манёвренностью для сложного рельефа.', kz: 'Күрделі жер бедеріне арналған жоғары маневрлі жеңіл көпмақсатты тікұшақ.', en: 'Light, highly maneuverable multipurpose helicopter for complex terrain.' }, icon: '🚁' },
             ].map((aircraft, i) => (
               <div key={i} className="bg-white/[0.07] backdrop-blur-sm border border-white/[0.08] p-6 hover:bg-white/[0.12] hover:-translate-y-1 transition-all group cursor-default rounded-sm">
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-[28px] group-hover:scale-110 transition-transform">{aircraft.icon}</span>
-                  <span className="text-[10px] font-bold tracking-widest uppercase text-amber/70 bg-amber/10 px-2 py-0.5 rounded-sm">{aircraft.type}</span>
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-amber/70 bg-amber/10 px-2 py-0.5 rounded-sm">{tr(aircraft.type, locale)}</span>
                 </div>
                 <div className="text-[20px] font-extrabold text-white tracking-tight mb-1">{aircraft.name}</div>
-                <div className="text-[11px] text-white/40 font-semibold tracking-wide mb-3">{aircraft.country}</div>
-                <div className="text-[12.5px] text-white/50 leading-relaxed">{aircraft.desc}</div>
+                <div className="text-[11px] text-white/40 font-semibold tracking-wide mb-3">{tr(aircraft.country, locale)}</div>
+                <div className="text-[12.5px] text-white/50 leading-relaxed">{tr(aircraft.desc, locale)}</div>
               </div>
             ))}
           </div>
@@ -439,19 +440,19 @@ export default function HomePage() {
       {/* ═══ BRANCHES / АВИАОТДЕЛЕНИЯ ═══ */}
       <section className="bg-sky px-8 md:px-14 py-16 md:py-24">
         <div className="text-[11px] tracking-[0.18em] uppercase font-bold text-forest-light mb-4 flex items-center gap-3 reveal from-bottom">
-          <span className="w-7 h-0.5 bg-forest-light shrink-0" />География присутствия
+          <span className="w-7 h-0.5 bg-forest-light shrink-0" />{t('homeGeo.eyebrow')}
         </div>
-        <h2 className="text-[clamp(28px,3.5vw,48px)] font-extrabold leading-[1.05] tracking-tight text-forest mb-4 reveal from-bottom" style={{ transitionDelay: '.1s', textWrap: 'balance' as never }}>
-          18 авиаотделений<br />по всему Казахстану
+        <h2 className="text-[clamp(28px,3.5vw,48px)] font-extrabold leading-[1.05] tracking-tight text-forest mb-4 reveal from-bottom max-w-[520px]" style={{ transitionDelay: '.1s', textWrap: 'balance' as never }}>
+          {t('homeGeo.title')}
         </h2>
         <p className="text-[15px] text-text-mid leading-[1.8] mb-12 max-w-[620px] reveal from-bottom" style={{ transitionDelay: '.2s' }}>
-          От Костаная на севере до Алматы на юге — наши подразделения обеспечивают охрану лесных массивов на всей территории республики
+          {t('homeGeo.desc')}
         </p>
 
         <BranchesMap />
 
         <Link href="/branches" className="mt-8 inline-flex items-center gap-2 px-7 py-3.5 text-[12.5px] font-bold tracking-wider uppercase no-underline bg-forest text-white rounded-sm hover:bg-forest-mid hover:-translate-y-0.5 transition-all">
-          Все отделения →
+          {t('homeGeo.all')} →
         </Link>
       </section>
 
