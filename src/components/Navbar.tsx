@@ -20,13 +20,13 @@ export function Navbar() {
     pathname === path ? 'text-forest bg-sky' : 'text-text-mid hover:text-forest hover:bg-sky';
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-6 md:px-12 h-[76px] bg-white/97 backdrop-blur-xl border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-[200] flex items-center justify-between gap-2 px-4 md:px-12 h-[76px] bg-white/97 backdrop-blur-xl border-b border-border">
       {/* Logo */}
-      <Link href="/" className="flex items-center gap-3.5 no-underline">
-        <img src="/logo.gif" alt="Казавиалесоохрана" className="w-[46px] h-[46px] shrink-0 object-contain" />
-        <div className="flex flex-col leading-tight">
-          <span className="text-[15px] font-extrabold text-forest tracking-wide">КАЗАВИАЛЕСООХРАНА</span>
-          <span className="text-[8.5px] text-text-dim tracking-widest uppercase font-medium mt-0.5">
+      <Link href="/" className="flex items-center gap-2.5 md:gap-3.5 no-underline min-w-0">
+        <img src="/logo.gif" alt="Казавиалесоохрана" className="w-[40px] h-[40px] md:w-[46px] md:h-[46px] shrink-0 object-contain" />
+        <div className="flex flex-col leading-tight min-w-0">
+          <span className="text-[12.5px] sm:text-[15px] font-extrabold text-forest tracking-wide truncate">КАЗАВИАЛЕСООХРАНА</span>
+          <span className="text-[8.5px] text-text-dim tracking-widest uppercase font-medium mt-0.5 truncate hidden sm:block">
             РГКП · {locale === 'kz' ? 'Қазақстан ормандарын қорғау' : locale === 'en' ? 'Kazakhstan Forest Protection' : 'Охрана лесов Казахстана'}
           </span>
         </div>
@@ -102,14 +102,14 @@ export function Navbar() {
       </ul>
 
       {/* Right side */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 md:gap-4 shrink-0">
         {/* Language Switch */}
         <div className="flex gap-0.5 bg-sky p-[3px] rounded">
           {(['ru', 'kz', 'en'] as const).map((l) => (
             <button
               key={l}
               onClick={() => switchLocale(l)}
-              className={`px-3 py-1 text-[11.5px] font-bold tracking-wide rounded-[3px] transition-all cursor-pointer border-none font-sans ${
+              className={`px-2 md:px-3 py-1 text-[10.5px] md:text-[11.5px] font-bold tracking-wide rounded-[3px] transition-all cursor-pointer border-none font-sans ${
                 locale === l ? 'bg-forest text-white' : 'bg-transparent text-text-dim hover:text-forest'
               }`}
             >
@@ -139,6 +139,7 @@ export function Navbar() {
           <Link href="/branches" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('branches')}</Link>
           <Link href="/equipment" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('equipment')}</Link>
           <Link href="/vacancies" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('vacancies')}</Link>
+          <Link href="/state" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('symbols')}</Link>
           <Link href="/contacts" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('contacts')}</Link>
         </div>
       )}

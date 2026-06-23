@@ -188,19 +188,8 @@ export function OrgChart() {
     drawLinks();
   }, [scale, drawLinks]);
 
-  const zoom = (delta: number) => setScale((s) => Math.min(1.4, Math.max(0.3, +(s + delta).toFixed(2))));
-
   return (
     <div className="orgchart">
-      <div className="oc-controls">
-        <button className="oc-btn" onClick={() => zoom(-0.1)}>{ui.less}</button>
-        <span className="oc-zoom">{Math.round(scale * 100)}%</span>
-        <button className="oc-btn" onClick={() => zoom(0.1)}>{ui.more}</button>
-        <button className="oc-btn" onClick={fit}>{ui.fit}</button>
-        <span className="oc-gap" />
-        <button className="oc-btn" onClick={() => window.print()}>{ui.print}</button>
-      </div>
-
       <div className="oc-scroll" ref={scrollRef}>
         <div className="oc-tree" ref={treeRef} style={{ transform: `scale(${scale})` }}>
           <svg className="links" ref={svgRef}>

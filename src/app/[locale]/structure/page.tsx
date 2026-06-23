@@ -19,7 +19,7 @@ export default function StructurePage() {
         <p className="mt-3 text-[15px] text-white/55 max-w-[600px] leading-relaxed">{t('structurePage.subtitle')} · {t('structurePage.unitsTotal')}</p>
       </div>
 
-      <div className="px-4 md:px-8 py-10">
+      <div className="bg-sky px-4 md:px-10 py-16">
         <OrgChart />
       </div>
     </>
