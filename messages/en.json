@@ -76,7 +76,7 @@
   },
   "homeGeo": {
     "eyebrow": "Geography of Presence",
-    "title": "18 aviation branches across Kazakhstan",
+    "title": "{count} aviation branches across Kazakhstan",
     "desc": "From Kostanay in the north to Almaty in the south — our units protect forests across the entire territory of the republic",
     "all": "All branches"
   },

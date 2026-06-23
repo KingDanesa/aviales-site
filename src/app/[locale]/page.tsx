@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { BranchesMap } from '@/components/BranchesMap';
 import { HomeContact } from '@/components/HomeContact';
 import { tr } from '@/lib/branches';
+import { siteStats } from '@/lib/siteStats';
 
 const services = [
   { icon: '🔥', key: 's1' },
@@ -283,7 +284,7 @@ export default function HomePage() {
 
           {/* Badge */}
           <div className="absolute bottom-10 right-10 z-[3] bg-white/95 backdrop-blur-sm p-5 shadow-[0_8px_48px_rgba(0,0,0,0.2)] rounded-sm" style={{ animation: 'badge-float 4s ease-in-out infinite' }}>
-            <div className="text-[38px] font-extrabold text-forest leading-none tracking-tight">6.5М</div>
+            <div className="text-[38px] font-extrabold text-forest leading-none tracking-tight">{siteStats.protectedArea}</div>
             <div className="text-[11px] text-text-dim mt-1 leading-snug max-w-[140px]">{t('hero.badge')}</div>
           </div>
         </div>
@@ -323,10 +324,10 @@ export default function HomePage() {
       {/* ═══ STATS ═══ */}
       <div className="grid grid-cols-2 lg:grid-cols-4 bg-sky border-b border-border" id="stats">
         {[
-          { n: '1978', target: '1978', fixed: true, label: t('stats.year'), w: '100' },
-          { n: '0', target: '18', label: t('stats.branches'), w: '75' },
-          { n: '0', target: '9000', label: t('stats.hours'), w: '88' },
-          { n: '6.5М', label: t('stats.hectares'), w: '75' },
+          { n: siteStats.foundedYear, target: siteStats.foundedYear, fixed: true, label: t('stats.year'), w: '100' },
+          { n: '0', target: siteStats.branchesCount, label: t('stats.branches'), w: '75' },
+          { n: '0', target: siteStats.flightHours, label: t('stats.hours'), w: '88' },
+          { n: siteStats.protectedArea, label: t('stats.hectares'), w: '75' },
         ].map((stat, i) => (
           <div key={i} className="p-8 md:p-10 border-r border-border last:border-r-0 reveal from-bottom" style={{ transitionDelay: `${i * 0.1}s` }}>
             <span className={`stat-n text-[clamp(36px,4vw,52px)] font-extrabold text-forest tracking-tight leading-none block`} {...(stat.target ? { 'data-target': stat.target, ...(stat.fixed ? { 'data-fixed': '1' } : {}) } : {})}>
@@ -443,7 +444,7 @@ export default function HomePage() {
           <span className="w-7 h-0.5 bg-forest-light shrink-0" />{t('homeGeo.eyebrow')}
         </div>
         <h2 className="text-[clamp(28px,3.5vw,48px)] font-extrabold leading-[1.05] tracking-tight text-forest mb-4 reveal from-bottom max-w-[520px]" style={{ transitionDelay: '.1s', textWrap: 'balance' as never }}>
-          {t('homeGeo.title')}
+          {t('homeGeo.title', { count: siteStats.branchesCount })}
         </h2>
         <p className="text-[15px] text-text-mid leading-[1.8] mb-12 max-w-[620px] reveal from-bottom" style={{ transitionDelay: '.2s' }}>
           {t('homeGeo.desc')}
