@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useLocale } from 'next-intl';
 import { ORG, type OrgNode } from '@/lib/structure';
 import { tx, totalLabel, OC_UI } from '@/lib/structureI18n';
@@ -91,11 +91,7 @@ function fanPath(sx: number, sy: number, anchors: Anchor[]): string {
 export function OrgChart() {
   const locale = useLocale();
   const ui = OC_UI[(locale as 'ru' | 'kz' | 'en')] ?? OC_UI.ru;
-  const [scale, setScale] = useState(1);
-  const scaleRef = useRef(1);
-  scaleRef.current = scale;
 
-  const scrollRef = useRef<HTMLDivElement>(null);
   const treeRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
@@ -106,10 +102,9 @@ export function OrgChart() {
     const lp = pathRef.current;
     if (!tree || !svg || !lp) return;
     const tb = tree.getBoundingClientRect();
-    const sc = scaleRef.current || 1;
     const R = (el: Element) => {
       const r = el.getBoundingClientRect();
-      return { l: (r.left - tb.left) / sc, t: (r.top - tb.top) / sc, w: r.width / sc, b: (r.bottom - tb.top) / sc };
+      return { l: r.left - tb.left, t: r.top - tb.top, w: r.width, b: r.bottom - tb.top };
     };
     let d = '';
 
@@ -144,20 +139,9 @@ export function OrgChart() {
     svg.setAttribute('height', String(tree.offsetHeight));
   }, []);
 
-  const fit = useCallback(() => {
-    const tree = treeRef.current;
-    const scroll = scrollRef.current;
-    if (!tree || !scroll) return;
-    const avail = scroll.clientWidth - 52;
-    const w = tree.offsetWidth;
-    if (w > 0) setScale(Math.min(1, Math.max(0.3, avail / w)));
-  }, []);
-
   useEffect(() => {
     drawLinks();
-    const onResize = () => {
-      drawLinks();
-    };
+    const onResize = () => drawLinks();
     window.addEventListener('resize', onResize);
     let ro: ResizeObserver | undefined;
     if (treeRef.current && typeof ResizeObserver !== 'undefined') {
@@ -165,33 +149,22 @@ export function OrgChart() {
       ro.observe(treeRef.current);
     }
     if (typeof document !== 'undefined' && document.fonts?.ready) {
-      document.fonts.ready.then(() => {
-        drawLinks();
-        fit();
-      });
+      document.fonts.ready.then(() => drawLinks());
     }
     const t1 = setTimeout(drawLinks, 80);
-    const t2 = setTimeout(() => {
-      drawLinks();
-      fit();
-    }, 450);
+    const t2 = setTimeout(drawLinks, 450);
     return () => {
       window.removeEventListener('resize', onResize);
       ro?.disconnect();
       clearTimeout(t1);
       clearTimeout(t2);
     };
-  }, [drawLinks, fit]);
-
-  // redraw after zoom changes
-  useEffect(() => {
-    drawLinks();
-  }, [scale, drawLinks]);
+  }, [drawLinks]);
 
   return (
     <div className="orgchart">
-      <div className="oc-scroll" ref={scrollRef}>
-        <div className="oc-tree" ref={treeRef} style={{ transform: `scale(${scale})` }}>
+      <div className="oc-scroll">
+        <div className="oc-tree" ref={treeRef}>
           <svg className="links" ref={svgRef}>
             <path ref={pathRef} d="" />
           </svg>
