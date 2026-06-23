@@ -247,3 +247,87 @@ html {
 .leaflet-bottom {
   z-index: 1 !important;
 }
+
+/* ===== Org structure chart (scoped) ===== */
+.orgchart {
+  --oc-card: #fff;
+  --oc-ink: #1b2a21;
+  --oc-soft: #566457;
+  --oc-faint: #8a9a8d;
+  --oc-line: #b9c6b6;
+  --oc-conn: #8aa088;
+  --oc-pine: #1d4a31;
+  --oc-pine-deep: #15391f;
+  --oc-amber: #bd7016;
+  --oc-slate: #3c6079;
+  --oc-slate-soft: #e7eff4;
+  --oc-green: #2e7d4f;
+}
+.orgchart .oc-controls {
+  display: flex; flex-wrap: wrap; gap: 9px; align-items: center; margin: 0 0 12px;
+}
+.orgchart .oc-btn {
+  border: 1px solid var(--oc-line); background: #fff; color: var(--oc-ink);
+  padding: 8px 13px; border-radius: 9px; font: inherit; font-size: 13px; font-weight: 700;
+  cursor: pointer; transition: 0.12s;
+}
+.orgchart .oc-btn:hover { border-color: var(--oc-green); background: #e7f0e6; }
+.orgchart .oc-zoom { font-weight: 700; min-width: 46px; text-align: center; color: var(--oc-soft); }
+.orgchart .oc-gap { flex: 1; }
+
+.orgchart .oc-scroll {
+  overflow: auto; max-height: 84vh; border: 1px solid var(--oc-line); border-radius: 14px;
+  background: #f7f8f4; padding: 26px; box-shadow: inset 0 1px 3px rgba(27, 42, 33, 0.05);
+  -webkit-overflow-scrolling: touch;
+}
+.orgchart .oc-tree { display: inline-block; transform-origin: top left; position: relative; min-width: 100%; }
+
+.orgchart svg.links { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; }
+.orgchart svg.links path { fill: none; stroke: var(--oc-conn); stroke-width: 2; }
+
+.orgchart .gd-row { display: flex; justify-content: center; }
+.orgchart .branches { display: flex; gap: 30px; align-items: flex-start; justify-content: center; margin-top: 44px; }
+.orgchart .branch { display: flex; flex-direction: column; align-items: flex-start; }
+
+.orgchart .vstack { position: relative; width: max-content; overflow: hidden; padding: 4px 4px 6px 24px; }
+.orgchart .vrow { position: relative; margin-top: 12px; }
+.orgchart .vrow:first-child { margin-top: 8px; }
+.orgchart .vrow > .box::before {
+  content: ""; position: absolute; left: -14px; top: 50%; width: 14px; border-top: 2px solid var(--oc-conn);
+}
+.orgchart .vrow > .box::after {
+  content: ""; position: absolute; left: -14px; top: -9999px; height: calc(9999px + 50%); border-left: 2px solid var(--oc-conn);
+}
+
+.orgchart .grid { display: flex; gap: 24px; align-items: flex-start; margin-top: 40px; }
+.orgchart .gcol { display: flex; flex-direction: column; }
+
+.orgchart .box {
+  position: relative; width: 192px; background: var(--oc-card); border: 1px solid var(--oc-line);
+  border-top: 3px solid var(--oc-green); border-radius: 8px; box-shadow: 0 1px 2px rgba(27, 42, 33, 0.07);
+  padding: 8px 10px 9px; text-align: left; transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.orgchart .box:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(27, 42, 33, 0.16); }
+.orgchart .box .t { font-weight: 700; font-size: 11.5px; line-height: 1.18; text-align: center; color: var(--oc-ink); }
+.orgchart .box .sub { font-size: 10px; font-style: italic; color: var(--oc-soft); text-align: center; margin-top: 2px; }
+.orgchart .box .tot { text-align: center; font-weight: 700; font-size: 11px; color: var(--oc-green); margin-top: 3px; }
+.orgchart .box .p { margin-top: 6px; border-top: 1px solid #edf1ea; padding-top: 5px; font-size: 10px; color: var(--oc-soft); }
+.orgchart .box .r { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; padding: 1px 0; }
+.orgchart .box .r span { flex: 1; }
+.orgchart .box .r b { flex: 0 0 auto; color: var(--oc-ink); font-weight: 700; font-variant-numeric: tabular-nums; }
+.orgchart .box.head { box-shadow: 0 1px 2px rgba(27, 42, 33, 0.1), 0 2px 6px rgba(27, 42, 33, 0.07); }
+
+.orgchart .box.k-director { width: 220px; background: var(--oc-pine); border-color: var(--oc-pine-deep); border-top-color: var(--oc-pine-deep); }
+.orgchart .box.k-director .t { color: #fff; font-size: 14px; }
+.orgchart .box.k-director .tot { color: #cfe6d5; }
+.orgchart .box.k-deputy { border-top-color: var(--oc-pine); }
+.orgchart .box.k-service { border-top-color: var(--oc-slate); }
+.orgchart .box.k-service .tot { color: var(--oc-slate); }
+.orgchart .box.k-link { border-top-color: var(--oc-slate); background: var(--oc-slate-soft); }
+.orgchart .box.k-link .tot { color: var(--oc-slate); }
+.orgchart .box.k-airbase { border-top-color: var(--oc-amber); }
+.orgchart .box.k-airbase .tot { color: var(--oc-amber); }
+.orgchart .box.k-office { border-top-color: var(--oc-green); }
+
+.orgchart .oc-legend { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 14px; font-size: 12.5px; color: var(--oc-soft); }
+.orgchart .oc-legend i { display: inline-block; width: 20px; height: 0; border-top: 3px solid; vertical-align: middle; margin-right: 6px; border-radius: 2px; }

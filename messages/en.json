@@ -183,8 +183,8 @@
   },
   "structurePage": {
     "subtitle": "Organizational structure of RSPE «Kazavialesookhrana»",
-    "hint": "Click the chart to open it at full size and view the details.",
-    "openFull": "Open full size"
+    "scrollHint": "The chart can be scrolled horizontally",
+    "unitsTotal": "302 staff units in total"
   },
   "statePage": {
     "flagTitle": "State Flag",
