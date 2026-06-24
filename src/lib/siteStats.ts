@@ -13,6 +13,6 @@ import { branches } from './branches';
 export const siteStats = {
   foundedYear: '1978',
   branchesCount: String(branches.length),
-  flightHours: '9000',
-  protectedArea: '6.5М',
+  flightHours: '10453',
+  protectedArea: '9 651',
 };

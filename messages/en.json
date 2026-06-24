@@ -24,7 +24,7 @@
     "subtitle": "The only specialized state organization in Kazakhstan for aerial detection and extinguishing of forest fires. Operating since 1978.",
     "btnAbout": "About Us",
     "btnNews": "News",
-    "badge": "hectares of forests under protection in Kazakhstan"
+    "badge": "thousand ha of forests under protection in Kazakhstan"
   },
   "ticker": {
     "label": "News"
@@ -33,7 +33,7 @@
     "year": "Year of founding aerial forest protection",
     "branches": "Aviation branches across the country",
     "hours": "Flight hours annually",
-    "hectares": "Hectares of forests under protection"
+    "hectares": "Thousand ha of forests under protection"
   },
   "aboutSection": {
     "eyebrow": "About Us",
