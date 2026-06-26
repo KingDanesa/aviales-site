@@ -503,7 +503,7 @@ export default function HomePage() {
                   <div className="text-[18px] font-bold leading-snug text-text">
                     {locale === 'kz' ? news[0].titleKz || news[0].titleRu : locale === 'en' ? news[0].titleEn || news[0].titleRu : news[0].titleRu}
                   </div>
-                  <Link href="/news" className="mt-4 text-[12px] font-bold text-forest-light flex items-center gap-1 no-underline">{t('newsSection.readMore')} →</Link>
+                  <Link href={`/news/${news[0].id}`} className="mt-4 text-[12px] font-bold text-forest-light flex items-center gap-1 no-underline">{t('newsSection.readMore')} →</Link>
                 </div>
               </div>
 
@@ -526,7 +526,7 @@ export default function HomePage() {
                       <div className="text-[14px] font-bold leading-snug text-text line-clamp-2">
                         {locale === 'kz' ? n.titleKz || n.titleRu : locale === 'en' ? n.titleEn || n.titleRu : n.titleRu}
                       </div>
-                      <Link href="/news" className="mt-4 text-[12px] font-bold text-forest-light flex items-center gap-1 no-underline">{t('newsSection.readMore')} →</Link>
+                      <Link href={`/news/${n.id}`} className="mt-4 text-[12px] font-bold text-forest-light flex items-center gap-1 no-underline">{t('newsSection.readMore')} →</Link>
                     </div>
                   </div>
                 ))}

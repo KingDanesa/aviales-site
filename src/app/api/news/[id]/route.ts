@@ -1,6 +1,17 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    const { id } = await params;
+    const news = await prisma.news.findUnique({ where: { id } });
+    if (!news) return NextResponse.json({ error: 'Не найдено' }, { status: 404 });
+    return NextResponse.json(news);
+  } catch {
+    return NextResponse.json({ error: 'Ошибка загрузки' }, { status: 500 });
+  }
+}
+
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
