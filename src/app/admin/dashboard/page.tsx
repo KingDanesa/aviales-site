@@ -144,7 +144,7 @@ function NewsTab() {
       fd.append('file', file);
       const res = await fetch('/api/upload', { method: 'POST', body: fd });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Не удалось загрузить фото');
+      if (!res.ok) throw new Error(data.detail || data.error || 'Не удалось загрузить фото');
       setForm(f => ({ ...f, imageUrl: data.url }));
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Ошибка загрузки фото');

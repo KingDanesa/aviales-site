@@ -20,8 +20,9 @@ export async function POST(request: Request) {
     const safe = (file.name || 'image').replace(/[^a-zA-Z0-9.\-_]/g, '_');
     const key = `news/${Date.now()}-${safe}`;
 
-    if (process.env.BLOB_READ_WRITE_TOKEN) {
-      const blob = await put(key, file, { access: 'public', addRandomSuffix: true });
+    const token = process.env.BLOB_READ_WRITE_TOKEN;
+    if (token) {
+      const blob = await put(key, file, { access: 'public', addRandomSuffix: true, token });
       return NextResponse.json({ url: blob.url });
     }
 
@@ -40,7 +41,9 @@ export async function POST(request: Request) {
     const name = `${Date.now()}-${safe}`;
     await writeFile(path.join(dir, name), bytes);
     return NextResponse.json({ url: `/uploads/${name}` });
-  } catch {
-    return NextResponse.json({ error: 'Ошибка загрузки файла' }, { status: 500 });
+  } catch (e) {
+    console.error('upload error:', e);
+    const detail = e instanceof Error ? e.message : String(e);
+    return NextResponse.json({ error: 'Ошибка загрузки файла', detail }, { status: 500 });
   }
 }
