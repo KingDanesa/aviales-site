@@ -18,10 +18,11 @@ export default function NewsPage() {
     fetch('/api/news')
       .then(r => r.json())
       .then(data => {
-        // Filter only published
-        setNewsData(data.filter((n: any) => n.published));
-        setLoading(false);
-      });
+        const arr = Array.isArray(data) ? data : [];
+        setNewsData(arr.filter((n: any) => n.published));
+      })
+      .catch(() => setNewsData([]))
+      .finally(() => setLoading(false));
   }, []);
 
   // Fallback for empty state

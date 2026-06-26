@@ -40,6 +40,10 @@ yarn-error.log*
 /.claude
 /docs
 
+# uploaded media (хранятся на диске/в облаке, не в репозитории)
+/public/uploads/*
+!/public/uploads/.gitkeep
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
 
 export async function POST(request: Request) {
   try {
@@ -12,15 +13,28 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: Save to database with Prisma when DB is connected
-    // await prisma.contactMessage.create({
-    //   data: { name, phone, email, subject, message }
-    // });
-
-    console.log('New contact message:', { name, phone, email, subject, message });
+    // Сохраняем в БД, но даже если база недоступна — форму не ломаем
+    try {
+      await prisma.contactMessage.create({
+        data: { name, phone: phone || '', email, subject: subject || '', message },
+      });
+    } catch (e) {
+      console.error('contact save failed:', e);
+    }
 
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: 'Ошибка сервера' }, { status: 500 });
+  }
+}
+
+export async function GET() {
+  try {
+    const messages = await prisma.contactMessage.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+    return NextResponse.json(messages);
+  } catch {
+    return NextResponse.json([]);
   }
 }

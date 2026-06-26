@@ -31,7 +31,8 @@ export default function HomePage() {
     // Fetch recent news
     fetch('/api/news')
       .then(res => res.json())
-      .then(data => setNews(data.filter((n: any) => n.published).slice(0, 3)));
+      .then(data => setNews((Array.isArray(data) ? data : []).filter((n: any) => n.published).slice(0, 3)))
+      .catch(() => setNews([]));
 
     const statsObs = new IntersectionObserver(
       (entries) => {
