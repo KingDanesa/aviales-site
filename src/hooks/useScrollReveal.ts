@@ -15,8 +15,20 @@ export function useScrollReveal() {
       { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     );
 
-    document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => observer.observe(el));
+    const observeAll = () => {
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => observer.observe(el));
+    };
+    observeAll();
 
-    return () => observer.disconnect();
+    // Контент часто появляется асинхронно (после загрузки из БД).
+    // Следим за изменениями DOM и наблюдаем новые .reveal-элементы,
+    // иначе они навсегда остаются прозрачными (opacity:0).
+    const mo = new MutationObserver(() => observeAll());
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      observer.disconnect();
+      mo.disconnect();
+    };
   }, []);
 }

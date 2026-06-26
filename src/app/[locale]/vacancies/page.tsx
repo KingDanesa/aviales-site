@@ -17,9 +17,11 @@ export default function VacanciesPage() {
     fetch('/api/vacancies')
       .then(r => r.json())
       .then(data => {
-        setVacancies(data.filter((v: any) => v.published));
-        setLoading(false);
-      });
+        const arr = Array.isArray(data) ? data : [];
+        setVacancies(arr.filter((v: any) => v.published));
+      })
+      .catch(() => setVacancies([]))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -55,7 +57,7 @@ export default function VacanciesPage() {
               const desc = locale === 'kz' ? v.descriptionKz || v.descriptionRu : locale === 'en' ? v.descriptionEn || v.descriptionRu : v.descriptionRu;
               
               return (
-                <div key={i} className="border border-border bg-white reveal from-bottom" style={{ transitionDelay: `${i * 0.1}s` }}>
+                <div key={i} className="border border-border bg-white">
                   <div className="p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-border">
                     <div>
                       <div className="flex gap-2 mb-3">

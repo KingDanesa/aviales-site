@@ -71,7 +71,10 @@ export default function NewsPage() {
       {loading ? (
         <div className="p-20 text-center text-text-dim">{t('common.loading')}</div>
       ) : newsData.length === 0 ? (
-        <div className="p-20 text-center text-text-dim">{t('newsPage.title')}: —</div>
+        <div className="px-8 py-24 text-center">
+          <div className="text-6xl opacity-20 mb-4">📰</div>
+          <p className="text-text-dim text-[15px]">Пока нет опубликованных новостей.</p>
+        </div>
       ) : (
         <div className="px-8 md:px-14 py-12">
           {/* Filter chips */}
@@ -97,7 +100,7 @@ export default function NewsPage() {
 
           {/* Featured (latest) — always has its own background, не схлопывается */}
           {featured && (
-            <Link href="/news" className="block no-underline mb-8 reveal from-bottom">
+            <Link href="/news" className="block no-underline mb-8">
               <div className="relative overflow-hidden rounded-xl min-h-[300px] md:min-h-[380px] flex items-end group bg-gradient-to-br from-forest to-forest-mid shadow-lg">
                 {featured.imageUrl && (
                   <Image src={featured.imageUrl} alt="" fill sizes="100vw" className="object-cover brightness-[0.55] saturate-[0.85] group-hover:scale-[1.03] transition-transform duration-700" />
@@ -123,7 +126,7 @@ export default function NewsPage() {
           {gridItems.length === 0 ? (
             <div className="py-16 text-center text-text-dim text-[14px]">В этом разделе пока нет новостей.</div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 reveal-stagger">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {gridItems.map((n, i) => (
                 <Link key={i} href="/news" className="no-underline group">
                   <article className="bg-white border border-border rounded-xl overflow-hidden flex flex-col h-full hover:shadow-xl hover:-translate-y-1 transition-all">
