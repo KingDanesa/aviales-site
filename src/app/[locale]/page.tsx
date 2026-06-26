@@ -128,17 +128,16 @@ export default function HomePage() {
 
         {/* Right */}
         <div className="relative overflow-hidden hidden lg:block">
-          <div className="absolute inset-0">
-            <div className="absolute -top-[15%] left-0 right-0 h-[130%] parallax origin-top" data-speed="0.3" style={{ animation: 'slowzoom 18s ease-in-out infinite alternate' }}>
-              <Image
-                src="/hero-forest.png"
-                alt="Forest protection"
-                fill
-                className="object-cover saturate-[0.85] brightness-[0.75]"
-                priority
-              />
-            </div>
-          </div>
+          <video
+            className="absolute inset-0 w-full h-full object-cover saturate-[0.9] brightness-[0.7]"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/hero-forest.png"
+          >
+            <source src="/hero-heli.mp4" type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-r from-[rgba(26,58,40,0.6)] via-[rgba(26,58,40,0.2)] to-transparent z-[1]" />
 
           {/* Badge */}
