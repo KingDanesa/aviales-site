@@ -25,7 +25,15 @@ export async function POST(request: Request) {
       return NextResponse.json({ url: blob.url });
     }
 
-    // Локальный диск
+    // На Vercel файловая система только для чтения — нужен Vercel Blob
+    if (process.env.VERCEL) {
+      return NextResponse.json(
+        { error: 'Хранилище фото не подключено. На Vercel: Storage → Blob → Connect, затем Redeploy.' },
+        { status: 500 }
+      );
+    }
+
+    // Локальный диск (свой сервер / локально)
     const bytes = Buffer.from(await file.arrayBuffer());
     const dir = path.join(process.cwd(), 'public', 'uploads');
     await mkdir(dir, { recursive: true });

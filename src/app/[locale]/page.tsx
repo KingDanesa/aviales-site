@@ -26,6 +26,16 @@ export default function HomePage() {
 
   const [news, setNews] = useState<any[]>([]);
 
+  const catLabel = (c: string): string => ({
+    fire: t('newsPage.filterFire'),
+    training: t('newsPage.filterTraining'),
+    raids: t('newsPage.filterRaids'),
+    meetings: t('newsPage.filterMeetings'),
+    events: t('newsPage.filterEvents'),
+    anticorr: t('newsPage.filterAnticorr'),
+    other: t('newsPage.filterOther'),
+  }[c] || c);
+
   // Stats counter animation
   useEffect(() => {
     // Fetch recent news
@@ -487,7 +497,7 @@ export default function HomePage() {
                 </div>
                 <div className="p-5 md:p-6">
                   <span className="inline-block bg-sky text-forest-light text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 mb-2.5">
-                    {news[0].category === 'fire' ? t('newsPage.filterFire') : news[0].category === 'training' ? t('newsPage.filterTraining') : news[0].category}
+                    {catLabel(news[0].category)}
                   </span>
                   <div className="text-[11px] text-text-dim mb-2 font-medium">{new Date(news[0].createdAt).toLocaleDateString()}</div>
                   <div className="text-[18px] font-bold leading-snug text-text">
@@ -510,7 +520,7 @@ export default function HomePage() {
                     </div>
                     <div className="p-5">
                       <span className="inline-block bg-sky text-forest-light text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 mb-2.5">
-                        {n.category === 'fire' ? t('newsPage.filterFire') : n.category === 'training' ? t('newsPage.filterTraining') : n.category}
+                        {catLabel(n.category)}
                       </span>
                       <div className="text-[11px] text-text-dim mb-2 font-medium">{new Date(n.createdAt).toLocaleDateString()}</div>
                       <div className="text-[14px] font-bold leading-snug text-text line-clamp-2">

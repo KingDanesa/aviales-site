@@ -14,6 +14,16 @@ export default function NewsPage() {
   const [newsData, setNewsData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const catLabel = (c: string): string => ({
+    fire: t('newsPage.filterFire'),
+    training: t('newsPage.filterTraining'),
+    raids: t('newsPage.filterRaids'),
+    meetings: t('newsPage.filterMeetings'),
+    events: t('newsPage.filterEvents'),
+    anticorr: t('newsPage.filterAnticorr'),
+    other: t('newsPage.filterOther'),
+  }[c] || c);
+
   useEffect(() => {
     fetch('/api/news')
       .then(r => r.json())
@@ -102,7 +112,7 @@ export default function NewsPage() {
                   <div className="p-6 md:p-8 flex flex-col justify-center">
                     <div className="flex items-center gap-3 mb-3">
                       <span className="bg-sky text-forest-light text-[10px] font-bold tracking-widest uppercase px-2.5 py-1">
-                        {n.category === 'fire' ? t('newsPage.filterFire') : n.category === 'training' ? t('newsPage.filterTraining') : n.category}
+                        {catLabel(n.category)}
                       </span>
                       <span className="text-[11px] text-text-dim font-medium">{new Date(n.createdAt).toLocaleDateString()}</span>
                     </div>
@@ -128,7 +138,9 @@ export default function NewsPage() {
                     { name: t('newsPage.filterTraining'), count: newsData.filter((n:any) => n.category==='training').length },
                     { name: t('newsPage.filterRaids'), count: newsData.filter((n:any) => n.category==='raids').length },
                     { name: t('newsPage.filterMeetings'), count: newsData.filter((n:any) => n.category==='meetings').length },
+                    { name: t('newsPage.filterEvents'), count: newsData.filter((n:any) => n.category==='events').length },
                     { name: t('newsPage.filterAnticorr'), count: newsData.filter((n:any) => n.category==='anticorr').length },
+                    { name: t('newsPage.filterOther'), count: newsData.filter((n:any) => n.category==='other').length },
                   ].map((c, i) => (
                     <a key={i} href="#" className="flex justify-between items-center p-2.5 px-3.5 bg-sky text-[13px] font-semibold text-text-mid no-underline hover:bg-forest hover:text-white transition-colors">
                       {c.name}

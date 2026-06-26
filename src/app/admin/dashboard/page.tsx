@@ -220,7 +220,9 @@ function NewsTab() {
               <option value="fire">Пожары</option>
               <option value="raids">Рейды</option>
               <option value="meetings">Совещания</option>
+              <option value="events">Мероприятия</option>
               <option value="anticorr">Антикоррупция</option>
+              <option value="other">Другое</option>
             </select>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-5">
