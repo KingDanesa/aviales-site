@@ -67,6 +67,9 @@ export function Navbar() {
               <Link href="/equipment" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
                 <span className="text-[15px] w-5 text-center">🚁</span>{t('equipment')}
               </Link>
+              <Link href="/safety" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
+                <span className="text-[15px] w-5 text-center">🦺</span>{t('safety')}
+              </Link>
               <hr className="border-border my-1.5" />
               <Link href="/vacancies" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
                 <span className="text-[15px] w-5 text-center">📋</span>{t('vacancies')}
@@ -138,6 +141,7 @@ export function Navbar() {
           <Link href="/leadership" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('leadership')}</Link>
           <Link href="/branches" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('branches')}</Link>
           <Link href="/equipment" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('equipment')}</Link>
+          <Link href="/safety" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('safety')}</Link>
           <Link href="/vacancies" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('vacancies')}</Link>
           <Link href="/state" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('symbols')}</Link>
           <Link href="/contacts" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('contacts')}</Link>
