@@ -22,7 +22,7 @@ const director: Leader = {
 };
 
 const deputies: Leader[] = [
-  { name: 'Абсаметов Дамир Маркэнович', role: ROLE_DEPUTY, email: 'Airbar@list.ru' },
+  { name: 'Абсаметов Дамир Маркэнович', role: ROLE_DEPUTY, email: 'Airbar@list.ru', phones: ['+7 777 000 81 81'] },
   { name: 'Абуев Игорь Александрович', role: ROLE_DEPUTY, email: 'Airbar@list.ru', phones: ['87272472704', '87775104499'] },
 ];
 

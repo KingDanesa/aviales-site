@@ -41,7 +41,7 @@ export default function HomePage() {
     // Fetch recent news
     fetch('/api/news')
       .then(res => res.json())
-      .then(data => setNews((Array.isArray(data) ? data : []).filter((n: any) => n.published).slice(0, 3)))
+      .then(data => setNews((Array.isArray(data) ? data : []).filter((n: any) => n.published).slice(0, 8)))
       .catch(() => setNews([]));
 
     const statsObs = new IntersectionObserver(
@@ -84,6 +84,11 @@ export default function HomePage() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const newsTitle = (n: any) => (locale === 'kz' ? n.titleKz || n.titleRu : locale === 'en' ? n.titleEn || n.titleRu : n.titleRu);
+  const tickerItems = news.length > 0
+    ? news.map(newsTitle)
+    : ['Официальный сайт РГКП «Казавиалесоохрана»', 'Авиационная охрана лесов Казахстана с 1978 года'];
 
   return (
     <div className="-mt-[76px]">
@@ -156,22 +161,12 @@ export default function HomePage() {
         </div>
         <div className="flex-1 overflow-hidden">
           <div className="flex whitespace-nowrap" style={{ animation: 'ticker 32s linear infinite' }}>
-            {[
-              'Сотрудники Южного авиационного звена успешно прошли плановую аттестацию',
-              'Подготовка к пожароопасному сезону 2025 завершена',
-              'Обучение природоохранных учреждений проведено в Кокшетау',
-              'Руководитель Каркаралинского отделения прошёл обучение во Франции',
-            ].map((item, i) => (
+            {tickerItems.map((item, i) => (
               <span key={i} className="px-9 text-[12px] text-black/65 font-semibold tracking-wide after:content-['·'] after:ml-9 after:opacity-40">
                 {item}
               </span>
             ))}
-            {[
-              'Сотрудники Южного авиационного звена успешно прошли плановую аттестацию',
-              'Подготовка к пожароопасному сезону 2025 завершена',
-              'Обучение природоохранных учреждений проведено в Кокшетау',
-              'Руководитель Каркаралинского отделения прошёл обучение во Франции',
-            ].map((item, i) => (
+            {tickerItems.map((item, i) => (
               <span key={`dup-${i}`} className="px-9 text-[12px] text-black/65 font-semibold tracking-wide after:content-['·'] after:ml-9 after:opacity-40">
                 {item}
               </span>
