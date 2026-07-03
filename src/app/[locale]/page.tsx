@@ -205,7 +205,7 @@ export default function HomePage() {
         <div className="relative overflow-hidden min-h-[400px] lg:min-h-[500px] reveal from-left group">
           <div className="absolute -top-[10%] left-0 right-0 h-[120%] parallax" data-speed="0.15">
             <Image
-              src="https://aviales.kz/uploads/posts/2025-03/1740984680_image-01-03-25-06-22-2.jpeg"
+              src="/gallery/g4.jpeg"
               alt="About"
               fill
               className="object-cover saturate-[0.8] brightness-[0.9] group-hover:scale-105 transition-transform duration-700"

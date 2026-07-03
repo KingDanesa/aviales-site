@@ -51,7 +51,7 @@ export default function AboutPage() {
         </div>
         <div className="relative reveal from-right">
           <div className="absolute -top-3.5 -right-3.5 bottom-3.5 left-3.5 border border-forest-pale -z-10" />
-          <Image src="https://aviales.kz/uploads/posts/2025-01/1737613841_5ac076e3-c844-4aa4-8a2c-8296e9d2d16c.jpg" alt="" width={600} height={450} className="w-full aspect-[4/3] object-cover saturate-[0.85]" />
+          <Image src="/gallery/g1.jpg" alt="" width={600} height={450} className="w-full aspect-[4/3] object-cover saturate-[0.85]" />
         </div>
       </div>
 
@@ -123,13 +123,13 @@ export default function AboutPage() {
         <h2 className="text-[clamp(28px,3.5vw,48px)] font-extrabold leading-[1.05] tracking-tight text-forest mb-10 reveal from-bottom">{t('aboutPage.galleryTitle')}</h2>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 reveal-stagger">
           {[
-            'https://aviales.kz/uploads/posts/2025-03/1740983100_1d54e5a8-6001-4326-871d-5c442eec8053.jpg',
-            'https://aviales.kz/uploads/posts/2026-02/1772079209_img_2683.jpg',
-            'https://aviales.kz/uploads/posts/2025-03/1740984680_image-01-03-25-06-22-2.jpeg',
-            'https://aviales.kz/uploads/posts/2025-01/1737613841_5ac076e3-c844-4aa4-8a2c-8296e9d2d16c.jpg',
-            'https://aviales.kz/uploads/posts/2025-03/1740999322_0bb049fe-b780-479b-bc52-99e18433af92.jpeg',
-            'https://aviales.kz/uploads/posts/2025-01/1737613856_d08a05b9-5719-48d7-a649-ad49cc53d40a.jpg',
-            'https://aviales.kz/uploads/posts/2024-10/1728895509_img_20241006_164710.jpg',
+            '/gallery/g2.jpg',
+            '/gallery/g3.jpg',
+            '/gallery/g4.jpeg',
+            '/gallery/g1.jpg',
+            '/gallery/g5.jpeg',
+            '/gallery/g6.jpg',
+            '/gallery/g7.jpg',
           ].map((src, i) => (
             <Image key={i} src={src} alt="" width={300} height={225} className={`w-full aspect-[4/3] object-cover saturate-[0.8] hover:saturate-110 hover:scale-[1.02] transition-all cursor-pointer ${i === 0 ? 'col-span-2 aspect-video' : ''}`} />
           ))}
