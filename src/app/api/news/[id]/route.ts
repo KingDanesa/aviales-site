@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { getSession } from '@/lib/auth';
 
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
@@ -13,10 +14,13 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
 }
 
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  if (!(await getSession())) {
+    return NextResponse.json({ error: 'Не авторизован' }, { status: 401 });
+  }
   try {
     const { id } = await params;
     const body = await request.json();
-    
+
     const news = await prisma.news.update({
       where: { id },
       data: body,
@@ -29,6 +33,9 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
 }
 
 export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  if (!(await getSession())) {
+    return NextResponse.json({ error: 'Не авторизован' }, { status: 401 });
+  }
   try {
     const { id } = await params;
     await prisma.news.delete({

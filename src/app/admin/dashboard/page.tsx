@@ -1,19 +1,38 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-type Tab = 'dashboard' | 'news' | 'vacancies' | 'messages';
+type Tab = 'dashboard' | 'news' | 'vacancies' | 'messages' | 'users';
 
-const navItems: { id: Tab; label: string; icon: string }[] = [
+const navItems: { id: Tab; label: string; icon: string; adminOnly?: boolean }[] = [
   { id: 'dashboard', label: 'Дашборд', icon: '📊' },
   { id: 'news', label: 'Новости', icon: '📰' },
   { id: 'vacancies', label: 'Вакансии', icon: '📋' },
   { id: 'messages', label: 'Сообщения', icon: '✉️' },
+  { id: 'users', label: 'Пользователи', icon: '👥', adminOnly: true },
 ];
 
 export default function AdminDashboard() {
   const [active, setActive] = useState<Tab>('dashboard');
+  const [me, setMe] = useState<{ email: string; role: string } | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    fetch('/api/auth/me')
+      .then(r => (r.ok ? r.json() : null))
+      .then(setMe)
+      .catch(() => setMe(null));
+  }, []);
+
+  const isAdmin = me?.role === 'admin';
+  const items = navItems.filter(i => !i.adminOnly || isAdmin);
+
+  const handleLogout = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    router.push('/admin');
+  };
 
   return (
     <div className="min-h-screen flex">
@@ -24,7 +43,7 @@ export default function AdminDashboard() {
           <div className="text-[9px] text-white/25 tracking-[0.2em] uppercase mt-0.5">Панель управления</div>
         </div>
         <nav className="flex-1 py-4">
-          {navItems.map((item) => (
+          {items.map((item) => (
             <button
               key={item.id}
               onClick={() => setActive(item.id)}
@@ -53,7 +72,12 @@ export default function AdminDashboard() {
             {navItems.find(n => n.id === active)?.label}
           </h1>
           <div className="flex items-center gap-4">
-            <Link href="/admin" className="text-[11px] text-white/50 hover:text-white transition-colors cursor-pointer no-underline">Выйти</Link>
+            {me?.email && (
+              <span className="text-[11px] text-white/35">
+                {me.email} · <span className="text-amber/80">{isAdmin ? 'админ' : 'редактор'}</span>
+              </span>
+            )}
+            <button onClick={handleLogout} className="text-[11px] text-white/50 hover:text-white transition-colors cursor-pointer bg-transparent border-none font-sans">Выйти</button>
           </div>
         </div>
 
@@ -62,6 +86,7 @@ export default function AdminDashboard() {
           {active === 'news' && <NewsTab />}
           {active === 'vacancies' && <VacanciesTab />}
           {active === 'messages' && <MessagesTab />}
+          {active === 'users' && isAdmin && <UsersTab currentEmail={me?.email} />}
         </div>
       </main>
     </div>
@@ -459,6 +484,179 @@ function MessagesTab() {
               <div className="text-[13px] text-white/60 mt-1 whitespace-pre-line">{m.message}</div>
             </div>
           ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+const emptyUser = { email: '', password: '', role: 'editor', name: '' };
+
+function UsersTab({ currentEmail }: { currentEmail?: string }) {
+  const [users, setUsers] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+  const [form, setForm] = useState(emptyUser);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const [ok, setOk] = useState('');
+
+  const fetchUsers = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/users');
+      const data = await res.json();
+      setUsers(Array.isArray(data) ? data : []);
+    } catch {
+      setUsers([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { fetchUsers(); }, []);
+
+  const flash = (msg: string) => { setOk(msg); setTimeout(() => setOk(''), 3000); };
+
+  const handleCreate = async () => {
+    setError('');
+    if (!form.email.trim() || !form.password) { setError('Укажите email и пароль'); return; }
+    if (form.password.length < 6) { setError('Пароль не короче 6 символов'); return; }
+    setSubmitting(true);
+    try {
+      const res = await fetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const d = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(d.error || 'Не удалось создать пользователя');
+      setForm(emptyUser);
+      setShowForm(false);
+      flash('Пользователь создан');
+      fetchUsers();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Ошибка');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleResetPassword = async (u: any) => {
+    const pw = prompt(`Новый пароль для ${u.email} (мин. 6 символов):`);
+    if (pw === null) return;
+    if (pw.length < 6) { alert('Пароль слишком короткий (мин. 6 символов)'); return; }
+    const res = await fetch(`/api/users/${u.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw }),
+    });
+    const d = await res.json().catch(() => ({}));
+    if (!res.ok) { alert(d.error || 'Не удалось сменить пароль'); return; }
+    flash(`Пароль для ${u.email} обновлён`);
+  };
+
+  const handleChangeRole = async (u: any, role: string) => {
+    const res = await fetch(`/api/users/${u.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ role }),
+    });
+    const d = await res.json().catch(() => ({}));
+    if (!res.ok) { alert(d.error || 'Не удалось сменить роль'); return; }
+    fetchUsers();
+  };
+
+  const handleDelete = async (u: any) => {
+    if (!confirm(`Удалить пользователя ${u.email}?`)) return;
+    const res = await fetch(`/api/users/${u.id}`, { method: 'DELETE' });
+    const d = await res.json().catch(() => ({}));
+    if (!res.ok) { alert(d.error || 'Не удалось удалить'); return; }
+    flash('Пользователь удалён');
+    fetchUsers();
+  };
+
+  const inputCls = 'border border-white/15 bg-white/5 px-4 py-3 text-sm text-white focus:border-amber outline-none transition-colors font-sans';
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <div className="text-white/50 text-[13px]">Учётные записи для входа в панель. Роль «редактор» — только новости и вакансии; «админ» — всё и управление пользователями.</div>
+        <button onClick={() => { setShowForm(!showForm); setError(''); }} className="px-5 py-2.5 text-[11px] font-bold tracking-wider uppercase bg-amber text-white rounded-sm hover:bg-amber-dark cursor-pointer border-none transition-colors whitespace-nowrap ml-4">
+          {showForm ? '← Назад' : '+ Добавить'}
+        </button>
+      </div>
+
+      {ok && <div className="bg-green-500/10 border border-green-500/30 text-green-400 text-[13px] font-semibold p-3 mb-5">✓ {ok}</div>}
+
+      {showForm ? (
+        <div className="bg-white/[0.04] border border-white/[0.08] p-8 max-w-2xl">
+          <h3 className="text-[17px] font-bold text-white mb-6">Новый пользователь</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[10px] font-bold tracking-widest uppercase text-white/30">Email (логин)</label>
+              <input value={form.email} onChange={e=>setForm({...form, email: e.target.value})} className={inputCls} placeholder="editor@aviales.kz" />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[10px] font-bold tracking-widest uppercase text-white/30">Имя (необязательно)</label>
+              <input value={form.name} onChange={e=>setForm({...form, name: e.target.value})} className={inputCls} />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[10px] font-bold tracking-widest uppercase text-white/30">Пароль</label>
+              <input type="text" value={form.password} onChange={e=>setForm({...form, password: e.target.value})} className={inputCls} placeholder="мин. 6 символов" />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[10px] font-bold tracking-widest uppercase text-white/30">Роль</label>
+              <select value={form.role} onChange={e=>setForm({...form, role: e.target.value})} className="border border-white/15 bg-white text-black px-4 py-3 text-sm focus:border-amber outline-none font-sans rounded-sm">
+                <option value="editor">Редактор</option>
+                <option value="admin">Администратор</option>
+              </select>
+            </div>
+          </div>
+          {error && <div className="bg-red-500/10 border border-red-500/30 text-red-300 text-[13px] font-medium p-3 mb-4">{error}</div>}
+          <button disabled={submitting} onClick={handleCreate} className="px-7 py-3 text-[12px] font-bold tracking-wider uppercase bg-amber text-white rounded-sm hover:bg-amber-dark cursor-pointer border-none disabled:opacity-50">{submitting ? 'Создание...' : 'Создать'}</button>
+        </div>
+      ) : (
+        <div className="bg-white/[0.04] border border-white/[0.08]">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-white/[0.08]">
+                <th className="text-left px-6 py-4 text-[10px] font-bold tracking-widest uppercase text-white/30">Email</th>
+                <th className="text-left px-6 py-4 text-[10px] font-bold tracking-widest uppercase text-white/30">Роль</th>
+                <th className="text-left px-6 py-4 text-[10px] font-bold tracking-widest uppercase text-white/30">Создан</th>
+                <th className="px-6 py-4 text-right text-[10px] font-bold tracking-widest uppercase text-white/30">Действия</th>
+              </tr>
+            </thead>
+            <tbody>
+              {loading ? <tr><td colSpan={4} className="p-6 text-center text-white/30">Загрузка...</td></tr> :
+               users.length === 0 ? <tr><td colSpan={4} className="p-6 text-center text-white/30">Пользователей нет</td></tr> :
+               users.map((u) => {
+                const isSelf = u.email === currentEmail;
+                return (
+                <tr key={u.id} className="border-b border-white/[0.04] hover:bg-white/[0.03] transition-colors">
+                  <td className="px-6 py-4 text-[13px] font-semibold text-white/80">{u.email}{isSelf && <span className="ml-2 text-[10px] text-white/30">(вы)</span>}</td>
+                  <td className="px-6 py-4">
+                    <select
+                      value={u.role === 'admin' ? 'admin' : 'editor'}
+                      onChange={e => handleChangeRole(u, e.target.value)}
+                      disabled={isSelf}
+                      className="bg-white/[0.06] text-white/70 text-[11px] font-bold tracking-wider uppercase px-2 py-1.5 rounded-sm border border-white/10 outline-none focus:border-amber disabled:opacity-40 cursor-pointer"
+                    >
+                      <option className="text-black" value="editor">Редактор</option>
+                      <option className="text-black" value="admin">Админ</option>
+                    </select>
+                  </td>
+                  <td className="px-6 py-4 text-[12px] text-white/30">{u.createdAt ? new Date(u.createdAt).toLocaleDateString() : '—'}</td>
+                  <td className="px-6 py-4">
+                    <div className="flex gap-2 justify-end">
+                      <button onClick={() => handleResetPassword(u)} className="text-[11px] text-amber/80 hover:text-amber cursor-pointer bg-transparent border border-amber/20 hover:border-amber/50 px-3 py-1.5 rounded-sm transition-colors">Сбросить пароль</button>
+                      {!isSelf && <button onClick={() => handleDelete(u)} className="text-[11px] text-red-400/60 hover:text-red-400 cursor-pointer bg-transparent border border-red-400/20 hover:border-red-400/50 px-3 py-1.5 rounded-sm transition-colors">Удалить</button>}
+                    </div>
+                  </td>
+                </tr>
+              );})}
+            </tbody>
+          </table>
         </div>
       )}
     </div>

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { put } from '@vercel/blob';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
+import { getSession } from '@/lib/auth';
 
 export const runtime = 'nodejs';
 
@@ -10,6 +11,9 @@ export const runtime = 'nodejs';
 //  - иначе → на диск в public/uploads (для своего сервера / локально).
 // Переезд на свой сервер: просто не задавать токен — само уйдёт на диск.
 export async function POST(request: Request) {
+  if (!(await getSession())) {
+    return NextResponse.json({ error: 'Не авторизован' }, { status: 401 });
+  }
   try {
     const form = await request.formData();
     const file = form.get('file');
