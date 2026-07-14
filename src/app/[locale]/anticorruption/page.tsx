@@ -1,0 +1,156 @@
+'use client';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
+
+// ─────────────────────────────────────────────────────────────
+// Документы. Чтобы поменять название — правь поле title/subtitle.
+// Файлы лежат в public/anticorruption/ (скачиваются по клику).
+// ─────────────────────────────────────────────────────────────
+type Doc = { title: string; subtitle: string; file: string };
+
+const docsRu: Doc[] = [
+  { title: 'Положение о противодействии коррупции', subtitle: 'Основной документ · PDF', file: 'polozhenie-ru.pdf' },
+  { title: 'Антикоррупционная политика', subtitle: 'PDF', file: 'politika-ru.pdf' },
+  { title: 'Политика уведомления о коррупционных правонарушениях', subtitle: 'PDF', file: 'politika-uvedomleniya-ru.pdf' },
+  { title: 'Правила по противодействию коррупции', subtitle: 'PDF', file: 'pravila-ru.pdf' },
+  { title: 'Кодекс деловой этики', subtitle: 'PDF', file: 'kodeks-ru.pdf' },
+];
+
+const docsKz: Doc[] = [
+  { title: 'Сыбайлас жемқорлыққа қарсы саясат', subtitle: 'Антикоррупционная политика · PDF', file: 'sayasat-kz.pdf' },
+  { title: 'Іскерлік этика кодексі', subtitle: 'Кодекс деловой этики · PDF', file: 'kodeks-kz.pdf' },
+  { title: 'Стандарт', subtitle: 'Стандарт · PDF', file: 'standart-kz.pdf' },
+  { title: 'Нұсқаулық', subtitle: 'Инструкция · PDF', file: 'nusqaulyq-kz.pdf' },
+];
+
+const principles = [
+  { icon: '🚫', title: 'Нулевая терпимость', text: 'Любые проявления коррупции недопустимы независимо от должности, статуса и обстоятельств.' },
+  { icon: '⚖️', title: 'Законность', text: 'Деятельность предприятия строится в строгом соответствии с законодательством Республики Казахстан.' },
+  { icon: '🔍', title: 'Прозрачность', text: 'Открытость процедур, закупок и принятия решений, исключающая конфликт интересов.' },
+  { icon: '🛡️', title: 'Защита заявителей', text: 'Лицам, сообщившим о фактах коррупции, гарантируется конфиденциальность и защита от преследования.' },
+];
+
+function DocCard({ doc }: { doc: Doc }) {
+  return (
+    <a
+      href={`/anticorruption/${doc.file}`}
+      download
+      className="group flex items-center gap-4 bg-white border border-border rounded-lg p-4 md:p-5 no-underline hover:border-forest hover:shadow-md transition-all"
+    >
+      <span className="w-12 h-12 rounded-lg bg-red-50 text-red-500 flex items-center justify-center text-[13px] font-extrabold tracking-wide shrink-0">
+        PDF
+      </span>
+      <span className="flex-1 min-w-0">
+        <span className="block text-[14.5px] font-bold text-forest leading-snug group-hover:text-amber-dark transition-colors">{doc.title}</span>
+        <span className="block text-[12px] text-text-dim mt-0.5">{doc.subtitle}</span>
+      </span>
+      <span className="shrink-0 w-9 h-9 rounded-full bg-sky text-forest flex items-center justify-center text-[16px] group-hover:bg-forest group-hover:text-white transition-colors">
+        ↓
+      </span>
+    </a>
+  );
+}
+
+export default function AntiCorruptionPage() {
+  const t = useTranslations();
+  useScrollReveal();
+
+  return (
+    <>
+      {/* Hero */}
+      <div className="bg-forest px-8 md:px-14 py-14 relative overflow-hidden">
+        <div className="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-white/[0.03]" />
+        <div className="flex items-center gap-2 text-[11px] text-white/40 tracking-widest uppercase font-semibold mb-4">
+          <Link href="/" className="text-white/40 no-underline hover:text-white/70">{t('common.home')}</Link>
+          <span className="text-white/20">›</span><span>{t('nav.anticorruption')}</span>
+        </div>
+        <h1 className="text-[clamp(28px,4vw,52px)] font-extrabold text-white tracking-tight leading-[1.08] max-w-[820px] relative z-[1]">{t('nav.anticorruption')}</h1>
+        <p className="mt-3 text-[15px] text-white/55 relative z-[1]">РГКП «Казавиалесоохрана»</p>
+      </div>
+
+      <div className="max-w-[920px] mx-auto px-6 md:px-8 py-14">
+        <div className="flex flex-col gap-6">
+          {/* Вступление */}
+          <section className="bg-white border border-border rounded-xl p-7 md:p-8 shadow-sm reveal from-bottom">
+            <p className="text-[15px] text-text-mid leading-[1.85]">
+              РГКП «Казавиалесоохрана» придерживается принципа <b className="text-forest">нулевой терпимости</b> к любым проявлениям коррупции.
+              Предприятие последовательно реализует меры по предупреждению и противодействию коррупции в соответствии с
+              Законом Республики Казахстан «О противодействии коррупции» и внутренними антикоррупционными документами.
+            </p>
+            <p className="text-[15px] text-text-mid leading-[1.85] mt-3">
+              Работники предприятия обязаны соблюдать требования антикоррупционного законодательства, не допускать конфликта интересов
+              и незамедлительно сообщать о ставших известными фактах коррупционных правонарушений.
+            </p>
+          </section>
+
+          {/* Принципы */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 reveal-stagger">
+            {principles.map((p, i) => (
+              <div key={i} className="bg-white border border-border rounded-xl p-6 hover:shadow-md transition-all">
+                <div className="flex items-center gap-3 mb-2.5">
+                  <span className="w-11 h-11 rounded-lg bg-sky flex items-center justify-center text-xl shrink-0">{p.icon}</span>
+                  <h3 className="text-[16px] font-extrabold text-forest leading-tight">{p.title}</h3>
+                </div>
+                <p className="text-[13.5px] text-text-mid leading-[1.7]">{p.text}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Сообщить о факте коррупции */}
+          <section className="rounded-xl p-8 md:p-9 bg-gradient-to-br from-forest to-forest-mid text-white relative overflow-hidden reveal from-bottom">
+            <div className="absolute -right-12 -top-12 w-56 h-56 rounded-full bg-white/[0.05]" />
+            <span className="inline-block bg-amber text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1 rounded-sm mb-4 relative z-[1]">Сообщить о коррупции</span>
+            <h2 className="text-[20px] md:text-[24px] font-extrabold mb-3 relative z-[1]">Столкнулись с фактом коррупции?</h2>
+            <p className="text-[14.5px] text-white/80 leading-[1.85] mb-6 relative z-[1] max-w-[640px]">
+              Сообщите о коррупционном правонарушении. Обращения рассматриваются конфиденциально,
+              заявителю гарантируется защита в соответствии с законодательством Республики Казахстан.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-[1]">
+              <div className="bg-white/[0.08] border border-white/15 rounded-lg p-5">
+                <div className="text-[11px] text-white/50 font-bold tracking-widest uppercase mb-1">Единый call-центр</div>
+                <div className="text-[12.5px] text-white/70 mb-2">Агентство РК по противодействию коррупции</div>
+                <a href="tel:1424" className="inline-flex items-center gap-2 text-[26px] font-extrabold text-white no-underline hover:text-amber transition-colors leading-none">
+                  📞 1424
+                </a>
+                <div className="text-[11px] text-white/40 mt-1.5">Звонок бесплатный, по всему Казахстану</div>
+              </div>
+              <div className="bg-white/[0.08] border border-white/15 rounded-lg p-5 flex flex-col">
+                <div className="text-[11px] text-white/50 font-bold tracking-widest uppercase mb-1">Обращение в предприятие</div>
+                <div className="text-[12.5px] text-white/70 mb-3 flex-1">Направьте сообщение руководству РГКП «Казавиалесоохрана» через форму обратной связи.</div>
+                <Link href="/contacts" className="inline-flex items-center justify-center gap-2 bg-amber text-white text-[12.5px] font-bold tracking-wide uppercase px-5 py-2.5 rounded-sm no-underline hover:bg-amber-dark transition-colors">
+                  Написать обращение →
+                </Link>
+              </div>
+            </div>
+          </section>
+
+          {/* Документы */}
+          <section className="bg-sky border border-border rounded-xl p-7 md:p-8 reveal from-bottom">
+            <div className="flex items-center gap-4 mb-2">
+              <span className="w-12 h-12 rounded-lg bg-white flex items-center justify-center text-2xl shrink-0 shadow-sm">📂</span>
+              <div>
+                <h2 className="text-[19px] md:text-[21px] font-extrabold text-forest leading-snug">Антикоррупционные документы</h2>
+                <p className="text-[13px] text-text-dim mt-0.5">Нажмите на документ, чтобы скачать (PDF)</p>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <div className="text-[11px] font-bold tracking-widest uppercase text-text-dim mb-3">Русский</div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {docsRu.map((d, i) => <DocCard key={i} doc={d} />)}
+              </div>
+            </div>
+
+            <div className="mt-7">
+              <div className="text-[11px] font-bold tracking-widest uppercase text-text-dim mb-3">Қазақ тілінде</div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {docsKz.map((d, i) => <DocCard key={i} doc={d} />)}
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </>
+  );
+}

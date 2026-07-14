@@ -79,7 +79,7 @@ export function Navbar() {
         </li>
         {/* State Dropdown */}
         <li className="relative group">
-          <button className={`flex items-center gap-1 px-3.5 py-2 text-[13px] font-semibold tracking-tight rounded transition-colors ${pathname.startsWith('/state') ? 'text-forest bg-sky' : 'text-text-mid hover:text-forest hover:bg-sky'}`}>
+          <button className={`flex items-center gap-1 px-3.5 py-2 text-[13px] font-semibold tracking-tight rounded transition-colors ${pathname.startsWith('/state') || pathname.startsWith('/anticorruption') ? 'text-forest bg-sky' : 'text-text-mid hover:text-forest hover:bg-sky'}`}>
             {t('state')}
             <span className="text-[9px] opacity-50 group-hover:rotate-180 transition-transform">▾</span>
           </button>
@@ -93,6 +93,10 @@ export function Navbar() {
               </Link>
               <Link href="/state#docs" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
                 <span className="text-[15px] w-5 text-center">📂</span>{t('docs')}
+              </Link>
+              <hr className="border-border my-1.5" />
+              <Link href="/anticorruption" className="flex items-center gap-2.5 px-5 py-2.5 text-text-mid no-underline text-[13px] font-medium hover:bg-sky hover:text-forest transition-colors">
+                <span className="text-[15px] w-5 text-center">🛡️</span>{t('anticorruption')}
               </Link>
             </div>
           </div>
@@ -144,6 +148,7 @@ export function Navbar() {
           <Link href="/safety" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('safety')}</Link>
           <Link href="/vacancies" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('vacancies')}</Link>
           <Link href="/state" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('symbols')}</Link>
+          <Link href="/anticorruption" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('anticorruption')}</Link>
           <Link href="/contacts" onClick={() => setMobileOpen(false)} className="py-2 text-[14px] font-semibold text-text-mid no-underline hover:text-forest">{t('contacts')}</Link>
         </div>
       )}

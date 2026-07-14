@@ -39,7 +39,7 @@ export function Footer() {
             <li><Link href="/state#symbols" className="text-white/55 no-underline text-[13px] font-medium hover:text-white/90 transition-colors">{t('stateSymbols')}</Link></li>
             <li><Link href="/state#message" className="text-white/55 no-underline text-[13px] font-medium hover:text-white/90 transition-colors">{t('presidentMessage')}</Link></li>
             <li><Link href="/state#docs" className="text-white/55 no-underline text-[13px] font-medium hover:text-white/90 transition-colors">{t('normativeActs')}</Link></li>
-            <li><Link href="/about" className="text-white/55 no-underline text-[13px] font-medium hover:text-white/90 transition-colors">{nav('anticorruption')}</Link></li>
+            <li><Link href="/anticorruption" className="text-white/55 no-underline text-[13px] font-medium hover:text-white/90 transition-colors">{nav('anticorruption')}</Link></li>
           </ul>
         </div>
 
@@ -59,7 +59,7 @@ export function Footer() {
         <div className="text-[12px] text-white/25">{t('copyright')}</div>
         <div className="flex gap-6">
           <Link href="/" className="text-[12px] text-white/25 no-underline hover:text-white/50 transition-colors">{t('sitemap')}</Link>
-          <Link href="/about" className="text-[12px] text-white/25 no-underline hover:text-white/50 transition-colors">{nav('anticorruption')}</Link>
+          <Link href="/anticorruption" className="text-[12px] text-white/25 no-underline hover:text-white/50 transition-colors">{nav('anticorruption')}</Link>
         </div>
       </div>
     </footer>
