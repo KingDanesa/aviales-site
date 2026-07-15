@@ -68,6 +68,25 @@ const principles: { icon: string; title: L; text: L }[] = [
 
 const T = {
   orgName: { ru: 'РГКП «Казавиалесоохрана»', kz: '«Казавиалесоохрана» РМҚК', en: 'RGKP «Kazavialesookhrana»' },
+
+  constBadge: { ru: '1 июля 2026 года', kz: '2026 жылғы 1 шілде', en: '1 July 2026' },
+  constHeading: {
+    ru: 'Новая Конституция Республики Казахстан',
+    kz: 'Қазақстан Республикасының жаңа Конституциясы',
+    en: 'The new Constitution of the Republic of Kazakhstan',
+  },
+  constText: {
+    ru: '1 июля 2026 года в Казахстане вступила в силу новая Конституция, которая была успешно принята гражданами на общереспубликанском референдуме 15 марта 2026 года. Данное событие ознаменовало переход страны к новому этапу масштабных политических и экономических реформ.',
+    kz: '2026 жылғы 1 шілдеде Қазақстанда 2026 жылғы 15 наурызда бүкілреспубликалық референдумда азаматтар сәтті қабылдаған жаңа Конституция күшіне енді. Бұл оқиға елдің ауқымды саяси және экономикалық реформалардың жаңа кезеңіне өтуін айқындады.',
+    en: 'On 1 July 2026, a new Constitution came into force in Kazakhstan, having been successfully adopted by citizens at a nationwide referendum on 15 March 2026. This event marked the country’s transition to a new stage of large-scale political and economic reforms.',
+  },
+  constTitle2026: { ru: 'Конституция РК (2026 г.)', kz: 'ҚР Конституциясы (2026 ж.)', en: 'Constitution of the RK (2026)' },
+  constTitle1995: { ru: 'Конституция РК (1995 г.)', kz: 'ҚР Конституциясы (1995 ж.)', en: 'Constitution of the RK (1995)' },
+  constCurrent: { ru: 'Действующая редакция', kz: 'Қолданыстағы редакция', en: 'Current version' },
+  constPrev: { ru: 'Предыдущая редакция', kz: 'Алдыңғы редакция', en: 'Previous version' },
+
+  introEyebrow: { ru: 'Позиция предприятия', kz: 'Кәсіпорын ұстанымы', en: 'Our position' },
+  introHeading: { ru: 'Нулевая терпимость к коррупции', kz: 'Сыбайлас жемқорлыққа нөлдік төзімділік', en: 'Zero tolerance for corruption' },
   intro1: {
     ru: 'РГКП «Казавиалесоохрана» придерживается принципа нулевой терпимости к любым проявлениям коррупции. Предприятие последовательно реализует меры по предупреждению и противодействию коррупции в соответствии с Законом Республики Казахстан «О противодействии коррупции» и внутренними антикоррупционными документами.',
     kz: '«Казавиалесоохрана» РМҚК сыбайлас жемқорлықтың кез келген көріністеріне нөлдік төзімділік қағидатын ұстанады. Кәсіпорын Қазақстан Республикасының «Сыбайлас жемқорлыққа қарсы іс-қимыл туралы» Заңына және ішкі сыбайлас жемқорлыққа қарсы құжаттарға сәйкес сыбайлас жемқорлықтың алдын алу және оған қарсы іс-қимыл жөніндегі шараларды дәйекті түрде іске асырады.',
@@ -78,6 +97,10 @@ const T = {
     kz: 'Кәсіпорын қызметкерлері сыбайлас жемқорлыққа қарсы заңнама талаптарын сақтауға, мүдделер қақтығысына жол бермеуге және белгілі болған сыбайлас жемқорлық құқық бұзушылықтары туралы дереу хабарлауға міндетті.',
     en: 'Employees of the enterprise are obliged to comply with anti-corruption legislation, avoid conflicts of interest, and immediately report any known facts of corruption offences.',
   },
+
+  principlesEyebrow: { ru: 'Основа работы', kz: 'Жұмыс негізі', en: 'Foundation' },
+  principlesHeading: { ru: 'Ключевые принципы', kz: 'Негізгі қағидаттар', en: 'Key principles' },
+
   reportBadge: { ru: 'Сообщить о коррупции', kz: 'Сыбайлас жемқорлық туралы хабарлау', en: 'Report corruption' },
   reportHeading: { ru: 'Столкнулись с фактом коррупции?', kz: 'Сыбайлас жемқорлық фактісіне тап болдыңыз ба?', en: 'Encountered an act of corruption?' },
   reportDesc: {
@@ -98,31 +121,46 @@ const T = {
     kz: '«Казавиалесоохрана» РМҚК басшылығына кері байланыс нысаны арқылы хабарлама жіберіңіз.',
     en: 'Send a message to the management of RGKP «Kazavialesookhrana» via the feedback form.',
   },
-  writeBtn: { ru: 'Написать обращение →', kz: 'Өтініш жазу →', en: 'Send a message →' },
+  writeBtn: { ru: 'Написать обращение', kz: 'Өтініш жазу', en: 'Send a message' },
   docsTitle: { ru: 'Антикоррупционные документы', kz: 'Сыбайлас жемқорлыққа қарсы құжаттар', en: 'Anti-corruption documents' },
   docsHint: { ru: 'Нажмите на документ, чтобы скачать (PDF)', kz: 'Жүктеп алу үшін құжатты басыңыз (PDF)', en: 'Click a document to download (PDF)' },
   groupRu: { ru: 'На русском языке', kz: 'Орыс тілінде', en: 'In Russian' },
   groupKz: { ru: 'На казахском языке', kz: 'Қазақ тілінде', en: 'In Kazakh' },
 };
 
-function DocCard({ doc }: { doc: Doc }) {
+function DocCard({ doc, highlight }: { doc: Doc; highlight?: boolean }) {
   return (
     <a
       href={`/anticorruption/${doc.file}`}
       download
-      className="group flex items-center gap-4 bg-white border border-border rounded-lg p-4 md:p-5 no-underline hover:border-forest hover:shadow-md transition-all"
+      className={`group flex items-center gap-4 rounded-xl p-4 md:p-[18px] no-underline transition-all duration-200 border hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-8px_rgba(26,58,40,0.25)] ${
+        highlight ? 'bg-white border-amber/40 hover:border-amber' : 'bg-white border-border hover:border-forest/40'
+      }`}
     >
-      <span className="w-12 h-12 rounded-lg bg-red-50 text-red-500 flex items-center justify-center text-[13px] font-extrabold tracking-wide shrink-0">
+      <span className="relative w-11 h-[52px] shrink-0 rounded-md bg-gradient-to-br from-red-500 to-red-600 text-white flex items-center justify-center text-[10px] font-extrabold tracking-wider shadow-[0_4px_10px_-2px_rgba(220,38,38,0.5)]">
+        <span className="absolute top-0 right-0 border-t-[9px] border-t-white/90 border-l-[9px] border-l-transparent rounded-tr-md" />
         PDF
       </span>
       <span className="flex-1 min-w-0">
-        <span className="block text-[14.5px] font-bold text-forest leading-snug group-hover:text-amber-dark transition-colors">{doc.title}</span>
-        <span className="block text-[12px] text-text-dim mt-0.5">{doc.subtitle}</span>
+        <span className="block text-[14px] font-bold text-forest leading-snug group-hover:text-amber-dark transition-colors">{doc.title}</span>
+        <span className="block text-[11.5px] text-text-dim mt-1 tracking-wide">{doc.subtitle}</span>
       </span>
-      <span className="shrink-0 w-9 h-9 rounded-full bg-sky text-forest flex items-center justify-center text-[16px] group-hover:bg-forest group-hover:text-white transition-colors">
+      <span className="shrink-0 w-9 h-9 rounded-full bg-sky text-forest flex items-center justify-center text-[15px] group-hover:bg-forest group-hover:text-white transition-all">
         ↓
       </span>
     </a>
+  );
+}
+
+function SectionHead({ eyebrow, title, icon }: { eyebrow: string; title: string; icon: string }) {
+  return (
+    <div className="flex items-center gap-4 mb-6">
+      <span className="w-12 h-12 rounded-xl bg-gradient-to-br from-forest to-forest-mid text-white flex items-center justify-center text-2xl shrink-0 shadow-[0_6px_16px_-4px_rgba(26,58,40,0.5)]">{icon}</span>
+      <div>
+        <div className="text-[11px] font-bold tracking-[0.16em] uppercase text-forest-light mb-1">{eyebrow}</div>
+        <h2 className="text-[20px] md:text-[23px] font-extrabold text-forest leading-tight tracking-tight">{title}</h2>
+      </div>
+    </div>
   );
 }
 
@@ -138,7 +176,8 @@ export default function AntiCorruptionPage() {
       {/* Hero */}
       <div className="bg-forest px-8 md:px-14 py-14 relative overflow-hidden">
         <div className="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-white/[0.03]" />
-        <div className="flex items-center gap-2 text-[11px] text-white/40 tracking-widest uppercase font-semibold mb-4">
+        <div className="absolute right-24 bottom-0 w-40 h-40 rounded-full bg-white/[0.02]" />
+        <div className="flex items-center gap-2 text-[11px] text-white/40 tracking-widest uppercase font-semibold mb-4 relative z-[1]">
           <Link href="/" className="text-white/40 no-underline hover:text-white/70">{t('common.home')}</Link>
           <span className="text-white/20">›</span><span>{t('nav.anticorruption')}</span>
         </div>
@@ -146,71 +185,99 @@ export default function AntiCorruptionPage() {
         <p className="mt-3 text-[15px] text-white/55 relative z-[1]">{L(T.orgName)}</p>
       </div>
 
-      <div className="max-w-[920px] mx-auto px-6 md:px-8 py-14">
-        <div className="flex flex-col gap-6">
-          {/* Вступление */}
-          <section className="bg-white border border-border rounded-xl p-7 md:p-8 shadow-sm reveal from-bottom">
-            <p className="text-[15px] text-text-mid leading-[1.85]">{L(T.intro1)}</p>
-            <p className="text-[15px] text-text-mid leading-[1.85] mt-3">{L(T.intro2)}</p>
+      <div className="max-w-[940px] mx-auto px-6 md:px-8 py-14">
+        <div className="flex flex-col gap-7">
+          {/* ── Новая Конституция РК (наверху) ── */}
+          <section className="relative overflow-hidden rounded-2xl border border-border shadow-[0_10px_40px_-16px_rgba(26,58,40,0.28)] bg-gradient-to-br from-sky2 via-white to-white reveal from-bottom">
+            <div className="h-1.5" style={{ background: 'linear-gradient(90deg, #12b5cf 0%, #12b5cf 52%, var(--color-amber) 100%)' }} />
+            <div className="p-7 md:p-9">
+              <div className="flex items-start gap-4 mb-5">
+                <span className="w-14 h-14 rounded-2xl bg-white border border-border shadow-sm flex items-center justify-center text-[32px] leading-none shrink-0">🇰🇿</span>
+                <div className="pt-0.5">
+                  <span className="inline-block bg-amber text-white text-[10.5px] font-bold tracking-[0.14em] uppercase px-3 py-1 rounded-full mb-2.5">{L(T.constBadge)}</span>
+                  <h2 className="text-[21px] md:text-[26px] font-extrabold text-forest leading-[1.12] tracking-tight">{L(T.constHeading)}</h2>
+                </div>
+              </div>
+              <p className="text-[15px] text-text-mid leading-[1.9] mb-7 max-w-[720px]">{L(T.constText)}</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <DocCard doc={{ title: L(T.constTitle2026), subtitle: `${L(T.constCurrent)} · PDF`, file: 'konstituciya-rk-2026.pdf' }} highlight />
+                <DocCard doc={{ title: L(T.constTitle1995), subtitle: `${L(T.constPrev)} · PDF`, file: 'konstituciya-rk-1995.pdf' }} />
+              </div>
+            </div>
           </section>
 
-          {/* Принципы */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 reveal-stagger">
-            {principles.map((p, i) => (
-              <div key={i} className="bg-white border border-border rounded-xl p-6 hover:shadow-md transition-all">
-                <div className="flex items-center gap-3 mb-2.5">
-                  <span className="w-11 h-11 rounded-lg bg-sky flex items-center justify-center text-xl shrink-0">{p.icon}</span>
-                  <h3 className="text-[16px] font-extrabold text-forest leading-tight">{L(p.title)}</h3>
-                </div>
-                <p className="text-[13.5px] text-text-mid leading-[1.7]">{L(p.text)}</p>
-              </div>
-            ))}
-          </div>
+          {/* ── Нулевая терпимость (позиция предприятия) ── */}
+          <section className="relative overflow-hidden rounded-2xl border border-border bg-white shadow-sm reveal from-bottom">
+            <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-forest to-forest-light" />
+            <div className="p-7 md:p-9 pl-8 md:pl-11">
+              <SectionHead eyebrow={L(T.introEyebrow)} title={L(T.introHeading)} icon="🛡️" />
+              <p className="text-[15px] text-text-mid leading-[1.9]">{L(T.intro1)}</p>
+              <p className="text-[15px] text-text-mid leading-[1.9] mt-3.5">{L(T.intro2)}</p>
+            </div>
+          </section>
 
-          {/* Сообщить о факте коррупции */}
-          <section className="rounded-xl p-8 md:p-9 bg-gradient-to-br from-forest to-forest-mid text-white relative overflow-hidden reveal from-bottom">
-            <div className="absolute -right-12 -top-12 w-56 h-56 rounded-full bg-white/[0.05]" />
-            <span className="inline-block bg-amber text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1 rounded-sm mb-4 relative z-[1]">{L(T.reportBadge)}</span>
-            <h2 className="text-[20px] md:text-[24px] font-extrabold mb-3 relative z-[1]">{L(T.reportHeading)}</h2>
-            <p className="text-[14.5px] text-white/80 leading-[1.85] mb-6 relative z-[1] max-w-[640px]">{L(T.reportDesc)}</p>
+          {/* ── Ключевые принципы ── */}
+          <section className="reveal from-bottom">
+            <div className="text-[11px] font-bold tracking-[0.16em] uppercase text-forest-light mb-1">{L(T.principlesEyebrow)}</div>
+            <h2 className="text-[20px] md:text-[23px] font-extrabold text-forest leading-tight tracking-tight mb-6">{L(T.principlesHeading)}</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 reveal-stagger">
+              {principles.map((p, i) => (
+                <div key={i} className="group bg-white border border-border rounded-2xl p-6 hover:shadow-[0_14px_34px_-16px_rgba(26,58,40,0.35)] hover:-translate-y-1 hover:border-forest/30 transition-all duration-200">
+                  <div className="flex items-center gap-3.5 mb-3">
+                    <span className="w-12 h-12 rounded-2xl bg-gradient-to-br from-forest-pale to-sky flex items-center justify-center text-[22px] shrink-0 group-hover:scale-110 transition-transform duration-200">{p.icon}</span>
+                    <h3 className="text-[16px] font-extrabold text-forest leading-tight">{L(p.title)}</h3>
+                  </div>
+                  <p className="text-[13.5px] text-text-mid leading-[1.75]">{L(p.text)}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ── Сообщить о факте коррупции ── */}
+          <section className="rounded-2xl p-8 md:p-10 bg-gradient-to-br from-forest to-forest-mid text-white relative overflow-hidden reveal from-bottom shadow-[0_16px_40px_-18px_rgba(26,58,40,0.6)]">
+            <div className="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-white/[0.05]" />
+            <div className="absolute -left-10 -bottom-14 w-52 h-52 rounded-full bg-white/[0.03]" />
+            <span className="inline-block bg-amber text-white text-[10.5px] font-bold tracking-[0.14em] uppercase px-3 py-1 rounded-full mb-4 relative z-[1]">{L(T.reportBadge)}</span>
+            <h2 className="text-[21px] md:text-[26px] font-extrabold mb-3 relative z-[1] tracking-tight">{L(T.reportHeading)}</h2>
+            <p className="text-[14.5px] text-white/75 leading-[1.9] mb-7 relative z-[1] max-w-[640px]">{L(T.reportDesc)}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-[1]">
-              <div className="bg-white/[0.08] border border-white/15 rounded-lg p-5">
-                <div className="text-[11px] text-white/50 font-bold tracking-widest uppercase mb-1">{L(T.callCenter)}</div>
-                <div className="text-[12.5px] text-white/70 mb-2">{L(T.agency)}</div>
-                <a href="tel:1424" className="inline-flex items-center gap-2 text-[26px] font-extrabold text-white no-underline hover:text-amber transition-colors leading-none">
-                  📞 1424
+              <div className="bg-white/[0.09] border border-white/15 rounded-xl p-6 backdrop-blur-sm">
+                <div className="text-[10.5px] text-white/50 font-bold tracking-[0.14em] uppercase mb-1.5">{L(T.callCenter)}</div>
+                <div className="text-[12.5px] text-white/70 mb-3 leading-snug">{L(T.agency)}</div>
+                <a href="tel:1424" className="inline-flex items-center gap-2 text-[30px] font-extrabold text-white no-underline hover:text-amber transition-colors leading-none">
+                  <span className="text-[20px]">📞</span>1424
                 </a>
-                <div className="text-[11px] text-white/40 mt-1.5">{L(T.freeCall)}</div>
+                <div className="text-[11px] text-white/40 mt-2">{L(T.freeCall)}</div>
               </div>
-              <div className="bg-white/[0.08] border border-white/15 rounded-lg p-5 flex flex-col">
-                <div className="text-[11px] text-white/50 font-bold tracking-widest uppercase mb-1">{L(T.enterpriseLabel)}</div>
-                <div className="text-[12.5px] text-white/70 mb-3 flex-1">{L(T.enterpriseText)}</div>
-                <Link href="/contacts" className="inline-flex items-center justify-center gap-2 bg-amber text-white text-[12.5px] font-bold tracking-wide uppercase px-5 py-2.5 rounded-sm no-underline hover:bg-amber-dark transition-colors">
-                  {L(T.writeBtn)}
+              <div className="bg-white/[0.09] border border-white/15 rounded-xl p-6 flex flex-col backdrop-blur-sm">
+                <div className="text-[10.5px] text-white/50 font-bold tracking-[0.14em] uppercase mb-1.5">{L(T.enterpriseLabel)}</div>
+                <div className="text-[12.5px] text-white/70 mb-4 flex-1 leading-relaxed">{L(T.enterpriseText)}</div>
+                <Link href="/contacts" className="inline-flex items-center justify-center gap-2 bg-amber text-white text-[12.5px] font-bold tracking-wide uppercase px-5 py-3 rounded-lg no-underline hover:bg-amber-dark hover:-translate-y-0.5 transition-all">
+                  {L(T.writeBtn)} →
                 </Link>
               </div>
             </div>
           </section>
 
-          {/* Документы */}
-          <section className="bg-sky border border-border rounded-xl p-7 md:p-8 reveal from-bottom">
-            <div className="flex items-center gap-4 mb-2">
-              <span className="w-12 h-12 rounded-lg bg-white flex items-center justify-center text-2xl shrink-0 shadow-sm">📂</span>
-              <div>
-                <h2 className="text-[19px] md:text-[21px] font-extrabold text-forest leading-snug">{L(T.docsTitle)}</h2>
-                <p className="text-[13px] text-text-dim mt-0.5">{L(T.docsHint)}</p>
-              </div>
-            </div>
+          {/* ── Документы ── */}
+          <section className="bg-sky border border-border rounded-2xl p-7 md:p-9 reveal from-bottom">
+            <SectionHead eyebrow={L(T.docsHint)} title={L(T.docsTitle)} icon="📂" />
 
-            <div className="mt-6">
-              <div className="text-[11px] font-bold tracking-widest uppercase text-text-dim mb-3">{L(T.groupRu)}</div>
+            <div className="mt-2">
+              <div className="flex items-center gap-3 mb-3.5">
+                <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-text-dim">{L(T.groupRu)}</span>
+                <span className="flex-1 h-px bg-border" />
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {docsRu.map((d, i) => <DocCard key={i} doc={d} />)}
               </div>
             </div>
 
-            <div className="mt-7">
-              <div className="text-[11px] font-bold tracking-widest uppercase text-text-dim mb-3">{L(T.groupKz)}</div>
+            <div className="mt-8">
+              <div className="flex items-center gap-3 mb-3.5">
+                <span className="text-[11px] font-bold tracking-[0.16em] uppercase text-text-dim">{L(T.groupKz)}</span>
+                <span className="flex-1 h-px bg-border" />
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {docsKz.map((d, i) => <DocCard key={i} doc={d} />)}
               </div>

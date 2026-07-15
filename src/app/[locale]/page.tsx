@@ -200,10 +200,10 @@ export default function HomePage() {
         <div className="relative overflow-hidden min-h-[400px] lg:min-h-[500px] reveal from-left group">
           <div className="absolute -top-[10%] left-0 right-0 h-[120%] parallax" data-speed="0.15">
             <Image
-              src="/gallery/g4.jpeg"
-              alt="About"
+              src="/hero-forest.png"
+              alt="Леса Казахстана"
               fill
-              className="object-cover saturate-[0.8] brightness-[0.9] group-hover:scale-105 transition-transform duration-700"
+              className="object-cover saturate-[0.9] brightness-[0.95] group-hover:scale-105 transition-transform duration-700"
             />
           </div>
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-sky2/10" />

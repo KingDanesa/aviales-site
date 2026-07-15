@@ -111,7 +111,7 @@ export const branches: Branch[] = [
     name: { ru: 'Катон-Карагайское', kz: 'Катонқарағай', en: 'Katon-Karagay' },
     region: { ru: 'ВКО', kz: 'ШҚО', en: 'East Kazakhstan' },
     address: { ru: 'ВКО, Катон-Карагайский район, с. Катон-Карагай, аэропорт', kz: 'ШҚО, Катонқарағай ауданы, Катонқарағай ауылы, әуежай', en: 'East Kazakhstan, Katon-Karagay district, Katon-Karagay village, airport' },
-    head: 'Василков В. В.', role: ROLE_HEAD, phones: ['8 705 499 1117'], email: 'avialesvko@mail.ru', lat: 49.17, lng: 85.61,
+    head: 'Василков Владимир Викторович', role: ROLE_HEAD, phones: ['8 705 499 1117'], email: 'avialesvko@mail.ru', lat: 49.17, lng: 85.61,
   },
   {
     id: 'bayanaul',
