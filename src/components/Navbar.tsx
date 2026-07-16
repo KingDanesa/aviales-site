@@ -25,7 +25,9 @@ export function Navbar() {
       <Link href="/" className="flex items-center gap-2.5 md:gap-3.5 no-underline min-w-0">
         <img src="/logo.gif" alt="Казавиалесоохрана" className="w-[40px] h-[40px] md:w-[46px] md:h-[46px] shrink-0 object-contain" />
         <div className="flex flex-col leading-tight min-w-0">
-          <span className="text-[12px] sm:text-[14.5px] font-extrabold text-forest tracking-tight truncate">РГКП «Казавиалесоохрана»</span>
+          <span className="text-[12px] sm:text-[14.5px] font-extrabold text-forest tracking-tight truncate">
+            {locale === 'kz' ? '«Қазавиаорманқорғау» РМҚК' : locale === 'en' ? 'RSEM «Kazavialesoohrana»' : 'РГКП «Казавиалесоохрана»'}
+          </span>
           <span className="text-[8.5px] text-text-dim tracking-widest uppercase font-medium mt-0.5 truncate hidden sm:block">
             {locale === 'kz' ? 'Қазақстан ормандарын авиациялық қорғау' : locale === 'en' ? 'Aerial Forest Protection of Kazakhstan' : 'Авиационная охрана лесов Казахстана'}
           </span>
